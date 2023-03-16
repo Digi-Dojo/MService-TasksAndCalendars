@@ -11,7 +11,7 @@ public class CalendarEvent {
     private LocalDateTime endDate;
     private User user;
     private Place place;
-    private List<String> tags;
+    private List<String> tags;// same as on the task (array is better)
 
     public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, User user, Place place, List<String> tags) {
         this.description = description;

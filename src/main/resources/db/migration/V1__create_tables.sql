@@ -21,7 +21,7 @@ CREATE TABLE tags
     PRIMARY KEY (id)
 );
 
-CREATE TABLE tasks
+CREATE TABLE `tasks`
 (
     id          BIGINT(20) NOT NULL AUTO_INCREMENT,
     description VARCHAR(255) NOT NULL,

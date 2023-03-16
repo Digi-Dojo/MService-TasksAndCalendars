@@ -9,7 +9,7 @@ public class Task {
     private Status status;
     private User user;
     private Place place;
-    private List<String> tags;
+    private List<String> tags; // probabilmente array è meglio per indicizzare
 
 
     public Task(String description, Status status, User user, Place place, List<String> tags) {
