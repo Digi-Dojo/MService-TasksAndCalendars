@@ -2,6 +2,7 @@ package it.unibz.taskcalendarservice;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class CalendarEventController{
     private String dbUsername;
     @Value("${spring.datasource.password}")
     private String dbPassword;
-    @Value("$(spring.datasource.driver-class-name)")
+    @Value("${spring.datasource.driver-class-name}")
     private String dbDriver;
 
     private Connection conn;
@@ -74,7 +75,7 @@ public class CalendarEventController{
                         .from("task_calendar_db.calendar_events")
                         .where("user_id = " + userId)
                         .where("start_date like '%" + startDate + "%'")
-                        .build();
+                        .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -98,7 +99,7 @@ public class CalendarEventController{
                         .from("task_calendar_db.calendar_events")
                         .where("id = " + taskId)
                         .where("user_id = " + userId)
-                        .build();
+                        .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -122,7 +123,7 @@ public class CalendarEventController{
                 .from("task_calendar_db.calendar_events")
                 .where("id = " + taskId)
                 .where("user_id = " + userId)
-                .build();
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -146,7 +147,7 @@ public class CalendarEventController{
                 .from("task_calendar_db.calendar_events")
                 .where("id = " + taskId)
                 .where("user_id = " + userId)
-                .build();
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -169,7 +170,7 @@ public class CalendarEventController{
         String sql  = qb.select()
                         .from("task_calendar_db.users")
                         .where("user_id = " + userId)
-                        .build();
+                        .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -192,7 +193,7 @@ public class CalendarEventController{
         String sql  = qb.select()
                         .from("task_calendar_db.places")
                         .where("id = " + placeId)
-                        .build();
+                        .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -217,7 +218,7 @@ public class CalendarEventController{
                         .join("task_calendar_db.calendar_event_tags ce", "cet.calendar_event_id = ce.id", Optional.empty())
                         .where("ce.id = " + taskId)
                         .where("ca.user_id = " + userId)
-                        .build();
+                        .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
@@ -231,48 +232,86 @@ public class CalendarEventController{
 
     }
 
-    public void setCalendarEvent() {
-        return;
+    /**
+     * Creates a calendar event in the database
+     * @throws SQLException
+     */
+    public void createCalendarEvent() throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.calendar_events")
+                        .value("description", description)
+                        .value("start_date", startDate.toString())
+                        .value("end_date", endDate.toString())
+                        .value("user_id", userId.toString())
+                        .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
     }
 
-    public void setCalendarDescription() {
-        return;
+    /**
+     * Updates a calendar event in the database
+     * @param taskId the id of the task to be updated
+     * @throws SQLException
+     */
+    public void updateCalendarEvent(int taskId) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        QueryBuilder sql = qb.update("task_calendar_db.calendar_events ce")
+                            .join("task_calendar_db.calendar_events_tags cet", "ce.id = cet.calendar_event_id", Optional.empty())
+                            .set("ce.description = " + description)
+                            .set("ce.start_date = " + startDate)
+                            .set("ce.end_date = " + endDate)
+                            .set("ce.user_id = " + userId);
+        for (int i = 0; i < tags.size(); i++) {
+            sql = sql.set("cet.tag_id = " + tags.get(i));
+        }
+        String finalSql = sql.where("ce.id = " + taskId)
+                            .buildUpdate();
+        try {
+            stmt.executeUpdate(finalSql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeConnection();
     }
 
-    public void setCalendarStartDate() {
-        return;
-    }
+    /**
+     * Deletes a calendar event from the database
+     * @param taskId the id of the task to be deleted
+     * @throws SQLException
+     */
+    public void deleteCalendarEvent(int taskId) throws SQLException {
+        connectToDB();
 
-    public void setCalendarEndDate() {
-        return;
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.delete("task_calendar_db.calendar_events")
+                        .where("id = " + taskId)
+                        .buildDelete();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeConnection();
     }
-
-    public void setCalendarUser() {
-        return;
-    }
-
-    public void setCalendarPlace() {
-        return;
-    }
-
-    public void setCalendarTags() {
-        return;
-    }
-
-    public void createCalendarEvent() {
-        return;
-    }
-
-    public void updateCalendarEvent() {
-        return;
-    }
-
-    public void deleteCalendarEvent() {
-        return;
-    }
-
-    public void retrieveCalendarEvent() {
-        return;
-    }
-
 }
