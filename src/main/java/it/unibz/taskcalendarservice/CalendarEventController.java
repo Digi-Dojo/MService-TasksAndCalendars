@@ -3,6 +3,7 @@ package it.unibz.taskcalendarservice;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -19,6 +20,7 @@ public class CalendarEventController{
     @Value("$(spring.datasource.driver-class-name)")
     private String dbDriver;
 
+    private Connection conn;
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -35,9 +37,7 @@ public class CalendarEventController{
         this.tags = tags;
     }
 
-    public ResultSet getCalendarEvent() throws SQLException {
-        // TODO: get the CalendarEvent with the given id from the database task_calendar_db
-        Connection conn = null;
+    private void connectToDB() {
         try {
             Class.forName(dbDriver);
             conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
@@ -53,39 +53,182 @@ public class CalendarEventController{
                 ex.printStackTrace();
             }
         }
+    }
+
+    private void closeConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ResultSet getCalendarEvent() throws SQLException {
+        connectToDB();
+
         assert conn != null;
         Long userId = user.id();
         Statement stmt = conn.createStatement();
-        String sql =    "SELECT * " +
-                        "FROM task_calendar_db.calendar_events " +
-                        "WHERE start_date like '%" + startDate+ "%'" +
-                        "AND user_id = "+ userId;
-        ResultSet rs = stmt.executeQuery(sql);
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.select("*")
+                        .from("task_calendar_db.calendar_events")
+                        .where("user_id = " + userId)
+                        .where("start_date like '%" + startDate + "%'")
+                        .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
         return rs;
     }
 
-    public void getCalendarDescription() {
-        return;
+    public ResultSet getCalendarDescription(int taskId) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql  = qb.select("description")
+                        .from("task_calendar_db.calendar_events")
+                        .where("id = " + taskId)
+                        .where("user_id = " + userId)
+                        .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return rs;
     }
 
-    public void getCalendarStartDate() {
-        return;
+    public ResultSet getCalendarStartDate(int taskId) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql  = qb.select("start_date")
+                .from("task_calendar_db.calendar_events")
+                .where("id = " + taskId)
+                .where("user_id = " + userId)
+                .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return rs;
     }
 
-    public void getCalendarEndDate() {
-        return;
+    public ResultSet getCalendarEndDate(int taskId) throws SQLException{
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql  = qb.select("end_date")
+                .from("task_calendar_db.calendar_events")
+                .where("id = " + taskId)
+                .where("user_id = " + userId)
+                .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return rs;
     }
 
-    public void getCalendarUser() {
-        return;
+    public ResultSet getCalendarUser() throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql  = qb.select()
+                        .from("task_calendar_db.users")
+                        .where("user_id = " + userId)
+                        .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return rs;
     }
 
-    public void getCalendarPlace() {
-        return;
+    public ResultSet getCalendarPlace() throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long placeId = place.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql  = qb.select()
+                        .from("task_calendar_db.places")
+                        .where("id = " + placeId)
+                        .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return rs;
     }
 
-    public void getCalendarTags() {
-        return;
+    public ResultSet getCalendarTags(int taskId) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = user.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql  = qb.select("tag_id")
+                        .from("task_calendar_db.calendar_events_tags cet")
+                        .join("task_calendar_db.calendar_event_tags ce", "cet.calendar_event_id = ce.id", Optional.empty())
+                        .where("ce.id = " + taskId)
+                        .where("ca.user_id = " + userId)
+                        .build();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+        return rs;
+
     }
 
     public void setCalendarEvent() {
