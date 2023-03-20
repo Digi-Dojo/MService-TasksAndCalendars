@@ -1,6 +1,36 @@
 package it.unibz.taskcalendarservice;
 
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class TaskService {
-//    This class should contain business logic related to Tasks, including methods for creating,
-//    updating, and deleting Task entities. It should also provide methods for retrieving Task entities from the TaskRepository
+
+    private final TaskRepository taskRepository;
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
+    public List<Task> findAll() {
+        return taskRepository.findAll();
+    }
+
+    public Optional<Task> findById(Long id) {
+        return taskRepository.findById(id);
+    }
+
+    public Task save(Task task) {
+        return taskRepository.save(task);
+    }
+
+    public void deleteById(Long id) {
+        taskRepository.deleteById(id);
+    }
+
+    public Task update(Task task) {
+        return taskRepository.save(task);
+    }
 }
