@@ -18,10 +18,34 @@ public class Task {
     private Place place;
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
-    public Task(String description, Status status, User user, Place place, List<String> tags) {
+    public Task(String description, Status status) {
+        this.description = description;
+        this.status = status;
+    }
+    public Task(String description, Status status, Place place) {
+        this.description = description;
+        this.status = status;
+        this.place = place;
+    }
+    public Task(String description, Status status, User user) {
         this.description = description;
         this.status = status;
         this.user = user;
+    }
+    public Task(String description, Status status, List<String> tags) {
+        this.description = description;
+        this.status = status;
+        this.tags = tags;
+    }
+    public Task(String description, Status status, User user, List<String> tags) {
+        this.description = description;
+        this.status = status;
+        this.user = user;
+        this.tags = tags;
+    }
+    public Task(String description, Status status, Place place, List<String> tags) {
+        this.description = description;
+        this.status = status;
         this.place = place;
         this.tags = tags;
     }
