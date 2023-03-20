@@ -139,8 +139,8 @@ public class TaskService {
             throw new IllegalArgumentException("Task with Id '" + id + "' not found");
         }
 
-        taskRepo.delete(taskRepo.getTaskById(id));
-
+        taskRepo.delete(wantedTask.get());
+        
         return taskRepo.findById(id).isEmpty();
     }
 
