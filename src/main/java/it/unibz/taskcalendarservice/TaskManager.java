@@ -3,12 +3,13 @@ package it.unibz.taskcalendarservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class TaskManager {
+public class TaskManager{
     private TaskRepository taskRepo;
 
     //This class manages the tasks in the local TaskRepository
@@ -37,7 +38,7 @@ public class TaskManager {
         return taskRepo.save(new Task(desc, status, place, tags));
     }
 
-    public Task findTask(Long id){
+    public Task getTaskById(long id) {
         Optional<Task> wantedTask = taskRepo.findById(id);
 
         if (wantedTask.isEmpty()) {
