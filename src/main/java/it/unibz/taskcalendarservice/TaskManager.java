@@ -17,6 +17,7 @@ public class TaskManager {
         this.taskRepo = taskRepo;
     }
 
+    //Create methods for each constructor of the Task class
     public Task createTask(String desc, Task.Status status){
         return taskRepo.save(new Task(desc, status));
     }
@@ -78,7 +79,6 @@ public class TaskManager {
         if(wantedTask.get().getUser() != null)
             wantedTask.get().setUser(newUser);
         else{
-
             if(wantedTask.get().getTags() != null)
                 wantedTask = Optional.of(new Task(wantedTask.get().getDescription(), wantedTask.get().getStatus(), newUser, wantedTask.get().getTags()));
             else
@@ -125,5 +125,17 @@ public class TaskManager {
 
         }
         return Objects.equals(wantedTask.get().getTags(), newTags);
+    }
+
+    public boolean deleteTask(Long id){
+        Optional<Task> wantedTask = taskRepo.findById(id);
+
+        if (wantedTask.isEmpty()) {
+            throw new IllegalArgumentException("Task with Id '" + id + "' not found");
+        }
+
+        taskRepo.delete(taskRepo.getTaskById(id));
+
+        return taskRepo.findById(id).isEmpty();
     }
 }
