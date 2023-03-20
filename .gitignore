@@ -133,7 +133,7 @@ fabric.properties
 .ionide
 
 ### Gradle ###
-.gradle
+.gradle*
 **/build/
 !src/**/build/
 
