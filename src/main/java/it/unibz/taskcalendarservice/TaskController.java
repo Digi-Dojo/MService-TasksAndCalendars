@@ -34,6 +34,41 @@ public class TaskController {
         this.tags = tags;
     }
 
+    // new constructors :
+
+     public TaskController(String description, Task.Status taskStatus) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+    }
+    public TaskController(String description, Task.Status taskStatus, Place relatedPlace) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.relatedPlace = relatedPlace;
+    }
+    public TaskController(String description, Task.Status taskStatus, User relatedUser) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.relatedUser = relatedUser;
+    }
+    public TaskController(String description, Task.Status taskStatus, List<String> tags) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.tags = tags;
+    }
+    public TaskController(String description, Task.Status taskStatus,  User relatedUser, List<String> tags) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.relatedUser = relatedUser;
+        this.tags = tags;
+    }
+    public TaskController(String description, Status status, Place place, List<String> tags) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.relatedPlace = relatedPlace;
+        this.tags = tags;
+    }
+     // -- ending of new constructors
+
     //Connection and disconnection methods for the DB
     private void connectToDB() {
         try {
