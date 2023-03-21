@@ -1,6 +1,7 @@
 package it.unibz.taskcalendarservice;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
@@ -8,9 +9,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 public class TaskServiceTest {
 
-    @Autowired
     private TaskRepository taskRepo;
-    @Autowired
+    @Mock
     private TaskService taskService;
 
     @Test
