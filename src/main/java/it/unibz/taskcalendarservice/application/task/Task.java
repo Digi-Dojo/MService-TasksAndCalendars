@@ -1,4 +1,7 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.application.task;
+
+import it.unibz.taskcalendarservice.application.Place;
+import it.unibz.taskcalendarservice.application.User;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

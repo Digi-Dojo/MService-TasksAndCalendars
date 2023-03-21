@@ -1,4 +1,7 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.application.calendar;
+
+import it.unibz.taskcalendarservice.application.Place;
+import it.unibz.taskcalendarservice.application.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

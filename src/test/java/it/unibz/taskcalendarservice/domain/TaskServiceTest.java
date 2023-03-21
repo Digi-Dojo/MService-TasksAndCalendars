@@ -1,8 +1,12 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.domain;
 
+import it.unibz.taskcalendarservice.application.User;
+import it.unibz.taskcalendarservice.application.task.Task;
+import it.unibz.taskcalendarservice.domain.task.TaskRepository;
+import it.unibz.taskcalendarservice.domain.task.TaskService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

@@ -1,13 +1,17 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.domain.calendar;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import it.unibz.taskcalendarservice.QueryBuilder;
+import it.unibz.taskcalendarservice.application.Place;
+import it.unibz.taskcalendarservice.application.User;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class CalendarEventController{
 //    This class should handle HTTP requests related to CalendarEvents, including creating, updating,
 //    deleting, and retrieving CalendarEvent entities. It should delegate to the CalendarEventService to perform business logic.

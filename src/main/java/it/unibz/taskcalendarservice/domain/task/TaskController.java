@@ -1,11 +1,16 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.domain.task;
 
+import it.unibz.taskcalendarservice.QueryBuilder;
+import it.unibz.taskcalendarservice.application.Place;
+import it.unibz.taskcalendarservice.application.User;
+import it.unibz.taskcalendarservice.application.task.Task;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
-
+@Controller
 public class TaskController {
 //     This class should handle HTTP requests related to Tasks, including creating, updating,
 //     deleting, and retrieving Task entities. It should delegate to the TaskService to perform business logic
