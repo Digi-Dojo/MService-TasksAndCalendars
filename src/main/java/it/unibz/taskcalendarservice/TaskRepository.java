@@ -1,8 +1,12 @@
 package it.unibz.taskcalendarservice;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-public interface TaskRepository {
+@Repository
+public interface TaskRepository extends JpaRepository<Task, Long>{
 
     Task createTask(Task task);
 

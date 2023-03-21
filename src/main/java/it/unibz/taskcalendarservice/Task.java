@@ -1,9 +1,16 @@
 package it.unibz.taskcalendarservice;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String description;
     private Status status;
@@ -11,13 +18,40 @@ public class Task {
     private Place place;
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
-
-    public Task(String description, Status status, User user, Place place, List<String> tags) {
+    public Task(String description, Status status) {
+        this.description = description;
+        this.status = status;
+    }
+    public Task(String description, Status status, Place place) {
+        this.description = description;
+        this.status = status;
+        this.place = place;
+    }
+    public Task(String description, Status status, User user) {
         this.description = description;
         this.status = status;
         this.user = user;
+    }
+    public Task(String description, Status status, List<String> tags) {
+        this.description = description;
+        this.status = status;
+        this.tags = tags;
+    }
+    public Task(String description, Status status, User user, List<String> tags) {
+        this.description = description;
+        this.status = status;
+        this.user = user;
+        this.tags = tags;
+    }
+    public Task(String description, Status status, Place place, List<String> tags) {
+        this.description = description;
+        this.status = status;
         this.place = place;
         this.tags = tags;
+    }
+
+    public Long getId(){
+        return id;
     }
 
     public String getDescription() {

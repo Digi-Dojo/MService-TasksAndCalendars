@@ -3,33 +3,30 @@ package it.unibz.taskcalendarservice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CalendarEventService {
-    private final CalendarEventRepository calendarEventRepository;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    public CalendarEventService(CalendarEventRepository calendarEventRepository) {
-        this.calendarEventRepository = calendarEventRepository;
-    }
+    private CalendarEventRepository calendarEventRepository;
 
-    public CalendarEvent createCalendarEvent(CalendarEvent calendarEvent) {
-        return calendarEventRepository.save(calendarEvent);
-    }
-
-    public CalendarEvent updateCalendarEvent(CalendarEvent calendarEvent) {
-        return calendarEventRepository.save(calendarEvent);
-    }
-
-    public List<CalendarEvent> getAllCalendarEvents() {
+    public List<CalendarEvent> findAll() {
         return calendarEventRepository.findAll();
     }
 
-    public CalendarEvent getCalendarEventById(Long id) {
-        return (CalendarEvent) calendarEventRepository.findById(id).orElse(null);
+    public Optional<Object> findById(Long id) {
+        return calendarEventRepository.findById(id);
     }
 
-    public void deleteCalendarEventById(Long id) {
+    public CalendarEvent save(CalendarEvent calendarEvent) {
+        return calendarEventRepository.save(calendarEvent);
+    }
+
+    public void deleteById(Long id) {
         calendarEventRepository.deleteById(id);
+    }
+
+    public CalendarEvent update(CalendarEvent calendarEvent) {
+        return calendarEventRepository.save(calendarEvent);
     }
 }
