@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class CalendarEventController{
 //    This class should handle HTTP requests related to CalendarEvents, including creating, updating,
 //    deleting, and retrieving CalendarEvent entities. It should delegate to the CalendarEventService to perform business logic.
@@ -29,6 +32,7 @@ public class CalendarEventController{
     private Place place;
     private List<String> tags;// same as on the task (array is better)
 
+    @Autowired
     public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, User user, Place place, List<String> tags) {
         this.description = description;
         this.startDate = startDate;

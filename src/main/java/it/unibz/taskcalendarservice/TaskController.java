@@ -1,5 +1,6 @@
 package it.unibz.taskcalendarservice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.sql.*;
@@ -26,6 +27,7 @@ public class TaskController {
     private Place relatedPlace;
     private List<String> tags;
 
+    @Autowired
     public TaskController(String description, Task.Status taskStatus, User relatedUser, Place relatedPlace, List<String> tags){
         this.description = description;
         this.taskStatus = taskStatus;

@@ -1,9 +1,11 @@
 package it.unibz.taskcalendarservice;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class CalendarEvent {
 
     private String description;

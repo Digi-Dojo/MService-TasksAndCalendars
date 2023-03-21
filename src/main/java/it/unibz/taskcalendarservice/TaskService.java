@@ -1,11 +1,13 @@
 package it.unibz.taskcalendarservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class TaskService {
 //    This class should contain business logic related to Tasks, including methods for creating,
 //    updating, and deleting Task entities. It should also provide methods for retrieving Task entities from the TaskRepository
