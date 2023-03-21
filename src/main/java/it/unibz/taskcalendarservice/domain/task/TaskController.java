@@ -4,6 +4,8 @@ import it.unibz.taskcalendarservice.QueryBuilder;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 import it.unibz.taskcalendarservice.application.task.Task;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
@@ -31,13 +33,41 @@ public class TaskController {
     private Place relatedPlace;
     private List<String> tags;
 
-    public TaskController(String description, Task.Status taskStatus, User relatedUser, Place relatedPlace, List<String> tags){
+    @Autowired
+    public TaskController(){    }
+
+     public TaskController(String description, Task.Status taskStatus) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+    }
+    public TaskController(String description, Task.Status taskStatus, Place relatedPlace) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.relatedPlace = relatedPlace;
+    }
+    public TaskController(String description, Task.Status taskStatus, User relatedUser) {
         this.description = description;
         this.taskStatus = taskStatus;
         this.relatedUser = relatedUser;
+    }
+    public TaskController(String description, Task.Status taskStatus, List<String> tags) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.tags = tags;
+    }
+    public TaskController(String description, Task.Status taskStatus,  User relatedUser, List<String> tags) {
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.relatedUser = relatedUser;
+        this.tags = tags;
+    }
+    public TaskController(String description, Task.Status status, Place place, List<String> tags) {
+        this.description = description;
+        this.taskStatus = taskStatus;
         this.relatedPlace = relatedPlace;
         this.tags = tags;
     }
+     // -- ending of new constructors
 
     //Connection and disconnection methods for the DB
     private void connectToDB() {
@@ -65,23 +95,87 @@ public class TaskController {
         }
     }
 
-    //CREATE OPERATION:
-    /** Creates a task entry in the database associated to this instance of a task
-     * @thrown SQLException
-     */
-    public void createCalendarEvent() throws SQLException {
+    public void createTask(String description, Task.Status taskStatus, Place relatedPlace, List<String> tags) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .value("place_id", String.valueOf(relatedPlace))
+                .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus) throws SQLException {
         connectToDB();
 
         assert conn != null;
         Long userId = relatedUser.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql = qb.insert("task_calendar_db.calendar_events")
+        String sql = qb.insert("task_calendar_db.task")
                 .value("description", description)
                 .value("status", String.valueOf(taskStatus))
-                .value("user_id", userId.toString())
+                .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus, Place relatedPlace) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
                 .value("place_id", String.valueOf(relatedPlace))
                 .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus,List<String> tags) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .buildInsert();
+
+        // Add tags to the query
+        for (String tag : tags) {
+            sql += qb.insert("task_calendar_db.task")
+                    .value("event_id", "?")
+                    .value("tag_name", "?")
+                    .buildInsert();
+        }
         try {
             stmt.executeQuery(sql);
         }
@@ -104,7 +198,7 @@ public class TaskController {
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.select("*")
-                .from("task_calendar_db.tasks")
+                .from("task_calendar_db.task")
                 .where("user_id = " + userId)
                 .buildSelect();
         ResultSet rs = null;
@@ -130,7 +224,7 @@ public class TaskController {
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.select("*")
-                .from("task_calendar_db.tasks")
+                .from("task_calendar_db.task")
                 .where("id = " + taskId)
                 .buildSelect();
         ResultSet rs = null;

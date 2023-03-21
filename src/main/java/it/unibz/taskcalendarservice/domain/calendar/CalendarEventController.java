@@ -8,6 +8,7 @@ import java.util.Optional;
 import it.unibz.taskcalendarservice.QueryBuilder;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
@@ -32,7 +33,8 @@ public class CalendarEventController{
     private User user;
     private Place place;
     private List<String> tags;// same as on the task (array is better)
-
+    @Autowired
+    public CalendarEventController(){}
     public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, User user, Place place, List<String> tags) {
         this.description = description;
         this.startDate = startDate;
@@ -41,7 +43,6 @@ public class CalendarEventController{
         this.place = place;
         this.tags = tags;
     }
-
     private void connectToDB() {
         try {
             Class.forName(dbDriver);
