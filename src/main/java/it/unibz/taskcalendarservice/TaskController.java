@@ -1,5 +1,6 @@
 package it.unibz.taskcalendarservice;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.sql.*;
@@ -61,7 +62,7 @@ public class TaskController {
         this.relatedUser = relatedUser;
         this.tags = tags;
     }
-    public TaskController(String description, Status status, Place place, List<String> tags) {
+    public TaskController(String description, Task.Status status, Place place, List<String> tags) {
         this.description = description;
         this.taskStatus = taskStatus;
         this.relatedPlace = relatedPlace;
@@ -99,14 +100,45 @@ public class TaskController {
     /** Creates a task entry in the database associated to this instance of a task
      * @thrown SQLException
      */
-    public void createCalendarEvent() throws SQLException {
+    /* to modify : I apply overloading technique to have the same method with different parameters as input which change depending upon the different constructors,
+    therefore, depending on the several task objects
+     */
+
+    /* old code:
+    public void createTask() throws SQLException {
         connectToDB();
 
         assert conn != null;
         Long userId = relatedUser.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql = qb.insert("task_calendar_db.calendar_events")
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .value("user_id", userId.toString())
+                .value("place_id", String.valueOf(relatedPlace))
+                .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+     */
+
+    // new code using overloading:
+
+    public void createTask(String description, Task.Status taskStatus, @NotNull User relatedUser, Place relatedPlace, List<String> tags) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = relatedUser.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
                 .value("description", description)
                 .value("status", String.valueOf(taskStatus))
                 .value("user_id", userId.toString())
@@ -122,6 +154,163 @@ public class TaskController {
         closeConnection();
     }
 
+    public void createTask(String description, Task.Status taskStatus) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = relatedUser.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus, Place relatedPlace) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = relatedUser.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .value("place_id", String.valueOf(relatedPlace))
+                .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus, @NotNull User relatedUser) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = relatedUser.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .value("user_id", userId.toString())
+                .buildInsert();
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus, @NotNull List<String> tags) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = relatedUser.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .buildInsert();
+
+        // Add tags to the query
+        for (String tag : tags) {
+            sql += qb.insert("task_calendar_db.task")
+                    .value("event_id", "?")
+                    .value("tag_name", "?")
+                    .buildInsert();
+        }
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+        public void createTask(String description, Task.Status taskStatus,  @NotNull User relatedUser, @NotNull List<String> tags) throws SQLException {
+            connectToDB();
+
+            assert conn != null;
+            Long userId = relatedUser.id();
+            Statement stmt = conn.createStatement();
+            QueryBuilder qb = new QueryBuilder();
+            String sql = qb.insert("task_calendar_db.task")
+                    .value("description", description)
+                    .value("status", String.valueOf(taskStatus))
+                    .value("user_id", userId.toString())
+                    .buildInsert();
+
+            // Add tags to the query
+            for (String tag : tags) {
+                sql += qb.insert("task_calendar_db.task_tags")
+                        .value("event_id", "?")
+                        .value("tag_name", "?")
+                        .buildInsert();
+            }
+            try {
+                stmt.executeQuery(sql);
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            closeConnection();
+    }
+
+    public void createTask(String description, Task.Status taskStatus,  Place relatedPlace, @NotNull List<String> tags) throws SQLException {
+        connectToDB();
+
+        assert conn != null;
+        Long userId = relatedUser.id();
+        Statement stmt = conn.createStatement();
+        QueryBuilder qb = new QueryBuilder();
+        String sql = qb.insert("task_calendar_db.task")
+                .value("description", description)
+                .value("status", String.valueOf(taskStatus))
+                .value("place_id", String.valueOf(relatedPlace))
+                .buildInsert();
+
+        // Add tags to the query
+        for (String tag : tags) {
+            sql += qb.insert("task_calendar_db.task_tags")
+                    .value("event_id", "?")
+                    .value("tag_name", "?")
+                    .buildInsert();
+        }
+        try {
+            stmt.executeQuery(sql);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        closeConnection();
+    }
+
+    // finishing creating tasks
+
+
     //READ OPERATIONS:
     /** Returns all tasks associated to the user in the database
      * @thrown SQLException
@@ -134,7 +323,7 @@ public class TaskController {
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.select("*")
-                .from("task_calendar_db.tasks")
+                .from("task_calendar_db.task")
                 .where("user_id = " + userId)
                 .buildSelect();
         ResultSet rs = null;
@@ -160,7 +349,7 @@ public class TaskController {
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.select("*")
-                .from("task_calendar_db.tasks")
+                .from("task_calendar_db.task")
                 .where("id = " + taskId)
                 .buildSelect();
         ResultSet rs = null;
