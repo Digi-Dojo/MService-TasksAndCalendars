@@ -33,16 +33,55 @@ public class CalendarEventController{
     private User user;
     private Place place;
     private List<String> tags;// same as on the task (array is better)
+
+    //Constructors
     @Autowired
     public CalendarEventController(){}
-    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, User user, Place place, List<String> tags) {
+    
+    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, List<String> tags) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tags = tags;
+    }
+
+    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, Place place) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.place = place;
+    }
+
+    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, User user) {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.user = user;
+    }
+
+    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, Place place, List<String> tags) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.place = place;
         this.tags = tags;
     }
+
+    public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate, User user, List<String> tags) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.user = user;
+        this.tags = tags;
+    }
+
+    //Methods
     private void connectToDB() {
         try {
             Class.forName(dbDriver);

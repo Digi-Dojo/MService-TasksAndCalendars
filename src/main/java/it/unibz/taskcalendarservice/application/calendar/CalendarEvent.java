@@ -16,15 +16,52 @@ public class CalendarEvent {
     private Place place;
     private List<String> tags;// same as on the task (array is better)
 
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, User user, Place place, List<String> tags) {
+    //Constructors
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Place place) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.place = place;
+    }
+
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, User user) {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.user = user;
+    }
+
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, List<String> tags) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tags = tags;
+    }
+    
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Place place, List<String> tags) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.place = place;
         this.tags = tags;
     }
 
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, User user, List<String> tags) {
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.user = user;
+        this.tags = tags;
+    }
+
+    //Getters and Setters
     public String getDescription() {
         return description;
     }
@@ -73,6 +110,7 @@ public class CalendarEvent {
         this.tags = tags;
     }
 
+    //Methods
     public void addTag(String tag) {
         if (tags == null) {
             tags = new ArrayList<>();

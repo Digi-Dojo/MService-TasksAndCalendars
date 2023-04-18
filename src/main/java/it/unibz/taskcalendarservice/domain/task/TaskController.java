@@ -4,6 +4,9 @@ import it.unibz.taskcalendarservice.QueryBuilder;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 import it.unibz.taskcalendarservice.application.task.Task;
+import it.unibz.taskcalendarservice.application.task.Status;
+
+
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,43 +31,43 @@ public class TaskController {
 
     private Connection conn;
     private String description;
-    private Task.Status taskStatus;
-    private User relatedUser;
-    private Place relatedPlace;
+    private Status status;
+    private User user;
+    private Place place;
     private List<String> tags;
 
     @Autowired
     public TaskController(){    }
 
-     public TaskController(String description, Task.Status taskStatus) {
+     public TaskController(String description, Status status) {
         this.description = description;
-        this.taskStatus = taskStatus;
+        this.status = status;
     }
-    public TaskController(String description, Task.Status taskStatus, Place relatedPlace) {
+    public TaskController(String description, Status status, Place place) {
         this.description = description;
-        this.taskStatus = taskStatus;
-        this.relatedPlace = relatedPlace;
+        this.status = status;
+        this.place= place;
     }
-    public TaskController(String description, Task.Status taskStatus, User relatedUser) {
+    public TaskController(String description, Status status, User user) {
         this.description = description;
-        this.taskStatus = taskStatus;
-        this.relatedUser = relatedUser;
+        this.status = status;
+        this.user = user;
     }
-    public TaskController(String description, Task.Status taskStatus, List<String> tags) {
+    public TaskController(String description, Status status, List<String> tags) {
         this.description = description;
-        this.taskStatus = taskStatus;
+        this.status = status;
         this.tags = tags;
     }
-    public TaskController(String description, Task.Status taskStatus,  User relatedUser, List<String> tags) {
+    public TaskController(String description, Status status,  User user, List<String> tags) {
         this.description = description;
-        this.taskStatus = taskStatus;
-        this.relatedUser = relatedUser;
+        this.status = status;
+        this.user = user;
         this.tags = tags;
     }
-    public TaskController(String description, Task.Status status, Place place, List<String> tags) {
+    public TaskController(String description, Status status, Place place, List<String> tags) {
         this.description = description;
-        this.taskStatus = taskStatus;
-        this.relatedPlace = relatedPlace;
+        this.status = status;
+        this.place = place;
         this.tags = tags;
     }
      // -- ending of new constructors
@@ -95,7 +98,7 @@ public class TaskController {
         }
     }
 
-    public void createTask(String description, Task.Status taskStatus, Place relatedPlace, List<String> tags) throws SQLException {
+    public void createTask(String description, Status taskStatus, Place relatedPlace, List<String> tags) throws SQLException {
         connectToDB();
 
         assert conn != null;
@@ -116,16 +119,16 @@ public class TaskController {
         closeConnection();
     }
 
-    public void createTask(String description, Task.Status taskStatus) throws SQLException {
+    public void createTask(String description, Status status) throws SQLException {
         connectToDB();
 
         assert conn != null;
-        Long userId = relatedUser.id();
+        Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.insert("task_calendar_db.task")
                 .value("description", description)
-                .value("status", String.valueOf(taskStatus))
+                .value("status", String.valueOf(status))
                 .buildInsert();
         try {
             stmt.executeQuery(sql);
@@ -137,7 +140,7 @@ public class TaskController {
         closeConnection();
     }
 
-    public void createTask(String description, Task.Status taskStatus, Place relatedPlace) throws SQLException {
+    public void createTask(String description, Status status, Place place) throws SQLException {
         connectToDB();
 
         assert conn != null;
@@ -145,8 +148,8 @@ public class TaskController {
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.insert("task_calendar_db.task")
                 .value("description", description)
-                .value("status", String.valueOf(taskStatus))
-                .value("place_id", String.valueOf(relatedPlace))
+                .value("status", String.valueOf(status))
+                .value("place_id", String.valueOf(place))
                 .buildInsert();
         try {
             stmt.executeQuery(sql);
@@ -158,7 +161,7 @@ public class TaskController {
         closeConnection();
     }
 
-    public void createTask(String description, Task.Status taskStatus,List<String> tags) throws SQLException {
+    public void createTask(String description, Status status, List<String> tags) throws SQLException {
         connectToDB();
 
         assert conn != null;
@@ -166,7 +169,7 @@ public class TaskController {
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.insert("task_calendar_db.task")
                 .value("description", description)
-                .value("status", String.valueOf(taskStatus))
+                .value("status", String.valueOf(status))
                 .buildInsert();
 
         // Add tags to the query
@@ -194,7 +197,7 @@ public class TaskController {
         connectToDB();
 
         assert conn != null;
-        Long userId = relatedUser.id();
+        Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.select("*")
@@ -248,14 +251,14 @@ public class TaskController {
         connectToDB();
 
         assert conn != null;
-        Long userId = relatedUser.id();
+        Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         QueryBuilder sql = qb.update("task_calendar_db.tasks ta")
                 .join("task_calendar_db.tasks_tags tat", "ta.id = tat.tasks_id", Optional.empty())
                 .set("ta.description = " + description)
-                .set("ta.status = " + taskStatus)
-                .set("ta.place_id = " + relatedPlace)
+                .set("ta.status = " + status)
+                .set("ta.place_id = " + place)
                 .set("ta.user_id = " + userId);
         for (int i = 0; i < tags.size(); i++) {
             sql = sql.set("tat.tag_id = " + tags.get(i));

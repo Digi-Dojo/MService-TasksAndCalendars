@@ -3,6 +3,8 @@ package it.unibz.taskcalendarservice.domain.task;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 import it.unibz.taskcalendarservice.application.task.Task;
+import it.unibz.taskcalendarservice.application.task.Status;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,22 +26,22 @@ public class TaskService {
     }
 
     //Create methods for each constructor of the Task class
-    public Task createTask(String desc, Task.Status status){
+    public Task createTask(String desc, Status status){
         return taskRepo.save(new Task(desc, status));
     }
-    public Task createTask(String desc, Task.Status status, Place place){
+    public Task createTask(String desc, Status status, Place place){
         return taskRepo.save(new Task(desc, status, place));
     }
-    public Task createTask(String desc, Task.Status status, User user){
+    public Task createTask(String desc, Status status, User user){
         return taskRepo.save(new Task(desc, status, user));
     }
-    public Task createTask(String desc, Task.Status status, List<String> tags){
+    public Task createTask(String desc, Status status, List<String> tags){
         return taskRepo.save(new Task(desc, status, tags));
     }
-    public Task createTask(String desc, Task.Status status, User user, List<String> tags){
+    public Task createTask(String desc, Status status, User user, List<String> tags){
         return taskRepo.save(new Task(desc, status, user, tags));
     }
-    public Task createTask(String desc, Task.Status status, Place place, List<String> tags){
+    public Task createTask(String desc, Status status, Place place, List<String> tags){
         return taskRepo.save(new Task(desc, status, place, tags));
     }
 
@@ -68,7 +70,7 @@ public class TaskService {
         return Objects.equals(wantedTask.get().getDescription(), newDescription);
     }
 
-    public boolean updateTaskStatus(Long id, Task.Status newStatus){
+    public boolean updateTaskStatus(Long id, Status newStatus){
         Optional<Task> wantedTask = taskRepo.findById(id);
 
         if (wantedTask.isEmpty()) {

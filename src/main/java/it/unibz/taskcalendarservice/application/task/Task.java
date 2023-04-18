@@ -6,8 +6,10 @@ import it.unibz.taskcalendarservice.application.User;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Task {
 
@@ -21,6 +23,7 @@ public class Task {
     private Place place;
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
+    //Constructors
     public Task(String description, Status status) {
         this.description = description;
         this.status = status;
@@ -53,6 +56,7 @@ public class Task {
         this.tags = tags;
     }
 
+    //Getters and Setters
     public Long getId(){
         return id;
     }
@@ -97,15 +101,11 @@ public class Task {
         this.tags = tags;
     }
 
+    //Methods
     public void addTag(String tag) {
         if (tags == null) {
             tags = new ArrayList<>();
         }
         tags.add(tag);
     }
-
-    public enum Status {
-        PENDING, DONE
-    }
-
 }
