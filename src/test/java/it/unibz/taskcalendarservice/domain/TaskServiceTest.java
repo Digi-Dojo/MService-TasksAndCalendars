@@ -2,6 +2,7 @@ package it.unibz.taskcalendarservice.domain;
 
 import it.unibz.taskcalendarservice.application.User;
 import it.unibz.taskcalendarservice.application.task.Task;
+import it.unibz.taskcalendarservice.application.task.Status;
 import it.unibz.taskcalendarservice.domain.task.TaskRepository;
 import it.unibz.taskcalendarservice.domain.task.TaskService;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class TaskServiceTest {
     @Test
     void createTaskTest(){
         String description = "Test task";
-        Task.Status status = Task.Status.DONE;
+        Status status = Status.DONE;
 
         Task createdTask = taskService.createTask(description, status);
 
@@ -47,15 +48,15 @@ public class TaskServiceTest {
 
     @Test
     void updateTaskStatusTest(){
-        Task task = new Task("Test task", Task.Status.PENDING);
+        Task task = new Task("Test task", Status.PENDING);
         taskRepo.save(task);
 
-        boolean result = taskService.updateTaskStatus(task.getId(), Task.Status.DONE);
+        boolean result = taskService.updateTaskStatus(task.getId(), Status.DONE);
         assertTrue(result);
 
         Optional<Task> updatedTask = taskRepo.findById(task.getId());
         assertTrue(updatedTask.isPresent());
-        assertEquals(Task.Status.DONE, updatedTask.get().getStatus());
+        assertEquals(Status.DONE, updatedTask.get().getStatus());
     }
 
     @Test
@@ -75,7 +76,7 @@ public class TaskServiceTest {
 
     @Test
     void deleteTaskTest() {
-        Task task = new Task("Test task", Task.Status.PENDING);
+        Task task = new Task("Test task", Status.PENDING);
         taskRepo.save(task);
 
         boolean result = taskService.deleteTask(task.getId());
@@ -88,7 +89,7 @@ public class TaskServiceTest {
     @Test
     void testUpdateTaskTags() {
         // create a task with tags to update
-        Task task = new Task("Test Task", Task.Status.PENDING);
+        Task task = new Task("Test Task", Status.PENDING);
         task.setTags(Arrays.asList("tag1", "tag2"));
         taskRepo.save(task);
 

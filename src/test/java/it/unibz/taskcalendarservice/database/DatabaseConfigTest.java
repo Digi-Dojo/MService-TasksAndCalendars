@@ -20,7 +20,7 @@ public class DatabaseConfigTest {
     @Test
     void createCalendarEventTest() throws SQLException {
 
-        CalendarEventController cec0 = new CalendarEventController("",null, null, null,null, null);
+        CalendarEventController cec0 = new CalendarEventController("",null, null);
         assertNull(cec0,"Method should return null");
 
         User user0 = new User(1L,"John");
@@ -37,7 +37,7 @@ public class DatabaseConfigTest {
         String[] list = {"Something, Otherthing"};
         List<String> tags = Arrays.asList(list);
 
-        CalendarEventController cec1 = new CalendarEventController("First Calendar", startDate, endDate, user0,place0, tags );
+        CalendarEventController cec1 = new CalendarEventController("First Calendar", startDate, endDate, user0, tags );
         assertAll((Executable) cec1);
 
         assertNotNull(cec1.getCalendarUser());
