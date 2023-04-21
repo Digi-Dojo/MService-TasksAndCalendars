@@ -31,8 +31,8 @@ public class CalendarEventRepositoryTest {
     @Test
     public void testFindAll() {
         // Define test data
-        CalendarEvent calendarEvent1 = new CalendarEvent("first event", LocalDateTime.of(2001, 03, 17, 10, 15, 30), LocalDateTime.of(2001, 03, 17, 10, 15, 30), new User((long) Math.pow(-9.223372,18),"Mirko"), new Place((long) Math.pow(-9.223372,18),"Bozen"), new ArrayList<>());
-        CalendarEvent calendarEvent2 = new CalendarEvent("Birthday Party", LocalDateTime.of(2023, 04, 30, 18, 30, 0), LocalDateTime.of(2023, 04, 30, 22, 0, 0), new User(1234567890L, "John"), new Place(9876543210L, "New York City"), new ArrayList<>());
+        CalendarEvent calendarEvent1 = new CalendarEvent("first event", LocalDateTime.of(2001, 03, 17, 10, 15, 30), LocalDateTime.of(2001, 03, 17, 10, 15, 30), new User((long) Math.pow(-9.223372,18),"Mirko"), new ArrayList<>());
+        CalendarEvent calendarEvent2 = new CalendarEvent("Birthday Party", LocalDateTime.of(2023, 04, 30, 18, 30, 0), LocalDateTime.of(2023, 04, 30, 22, 0, 0), new User(1234567890L, "John"),new ArrayList<>());
 
         List<CalendarEvent> expectedEvents = Arrays.asList(calendarEvent1, calendarEvent2);
 
