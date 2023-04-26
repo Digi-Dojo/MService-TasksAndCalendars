@@ -14,4 +14,6 @@ public interface CalendarEventRepository {
     public CalendarEvent save(CalendarEvent calendarEvent);
 
     public void deleteById(Long id);
+
+    Optional<CalendarEventService> findByName(String name);
 }

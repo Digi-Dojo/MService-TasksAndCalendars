@@ -8,12 +8,21 @@ import java.util.Optional;
 import it.unibz.taskcalendarservice.QueryBuilder;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
+import it.unibz.taskcalendarservice.application.calendar.CalendarEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping(path = "/v1/calendarEvent")
 
 @Controller
-public class CalendarEventController{
+public class CalendarEventController {
 //    This class should handle HTTP requests related to CalendarEvents, including creating, updating,
 //    deleting, and retrieving CalendarEvent entities. It should delegate to the CalendarEventService to perform business logic.
 
@@ -35,9 +44,18 @@ public class CalendarEventController{
     private List<String> tags;// same as on the task (array is better)
 
     //Constructors
+    private ManageCalendarEvents manageCalendarEvents;
+
     @Autowired
-    public CalendarEventController(){}
-    
+    public CalendarEventController(ManageCalendarEvents manageCalendarEvents) {
+        this.manageCalendarEvents = manageCalendarEvents;
+    }
+
+    @PostMapping // POST /v1/calendarEvent < { name: "something" } >
+    public CalendarEvent createNewCalendarEvent(@RequestBody CreateCalendarEventDTO dto) {
+        return manageCalendarEvents.createNewCalendarEvent(dto.getName());
+    }
+
     public CalendarEventController(String description, LocalDateTime startDate, LocalDateTime endDate) {
         this.description = description;
         this.startDate = startDate;
@@ -116,15 +134,14 @@ public class CalendarEventController{
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.select("*")
-                        .from("task_calendar_db.calendar_events")
-                        .where("user_id = " + userId)
-                        .where("start_date like '%" + startDate + "%'")
-                        .buildSelect();
+                .from("task_calendar_db.calendar_events")
+                .where("user_id = " + userId)
+                .where("start_date like '%" + startDate + "%'")
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -139,16 +156,15 @@ public class CalendarEventController{
         Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql  = qb.select("description")
-                        .from("task_calendar_db.calendar_events")
-                        .where("id = " + taskId)
-                        .where("user_id = " + userId)
-                        .buildSelect();
+        String sql = qb.select("description")
+                .from("task_calendar_db.calendar_events")
+                .where("id = " + taskId)
+                .where("user_id = " + userId)
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -163,7 +179,7 @@ public class CalendarEventController{
         Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql  = qb.select("start_date")
+        String sql = qb.select("start_date")
                 .from("task_calendar_db.calendar_events")
                 .where("id = " + taskId)
                 .where("user_id = " + userId)
@@ -171,8 +187,7 @@ public class CalendarEventController{
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -180,14 +195,14 @@ public class CalendarEventController{
         return rs;
     }
 
-    public ResultSet getCalendarEndDate(int taskId) throws SQLException{
+    public ResultSet getCalendarEndDate(int taskId) throws SQLException {
         connectToDB();
 
         assert conn != null;
         Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql  = qb.select("end_date")
+        String sql = qb.select("end_date")
                 .from("task_calendar_db.calendar_events")
                 .where("id = " + taskId)
                 .where("user_id = " + userId)
@@ -195,8 +210,7 @@ public class CalendarEventController{
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -211,15 +225,14 @@ public class CalendarEventController{
         Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql  = qb.select()
-                        .from("task_calendar_db.users")
-                        .where("user_id = " + userId)
-                        .buildSelect();
+        String sql = qb.select()
+                .from("task_calendar_db.users")
+                .where("user_id = " + userId)
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -234,15 +247,14 @@ public class CalendarEventController{
         Long placeId = place.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql  = qb.select()
-                        .from("task_calendar_db.places")
-                        .where("id = " + placeId)
-                        .buildSelect();
+        String sql = qb.select()
+                .from("task_calendar_db.places")
+                .where("id = " + placeId)
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -257,17 +269,16 @@ public class CalendarEventController{
         Long userId = user.id();
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
-        String sql  = qb.select("tag_id")
-                        .from("task_calendar_db.calendar_events_tags cet")
-                        .join("task_calendar_db.calendar_event_tags ce", "cet.calendar_event_id = ce.id", Optional.empty())
-                        .where("ce.id = " + taskId)
-                        .where("ca.user_id = " + userId)
-                        .buildSelect();
+        String sql = qb.select("tag_id")
+                .from("task_calendar_db.calendar_events_tags cet")
+                .join("task_calendar_db.calendar_event_tags ce", "cet.calendar_event_id = ce.id", Optional.empty())
+                .where("ce.id = " + taskId)
+                .where("ca.user_id = " + userId)
+                .buildSelect();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -278,6 +289,7 @@ public class CalendarEventController{
 
     /**
      * Creates a calendar event in the database
+     *
      * @throws SQLException
      */
     public void createCalendarEvent() throws SQLException {
@@ -288,15 +300,14 @@ public class CalendarEventController{
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.insert("task_calendar_db.calendar_events")
-                        .value("description", description)
-                        .value("start_date", startDate.toString())
-                        .value("end_date", endDate.toString())
-                        .value("user_id", userId.toString())
-                        .buildInsert();
+                .value("description", description)
+                .value("start_date", startDate.toString())
+                .value("end_date", endDate.toString())
+                .value("user_id", userId.toString())
+                .buildInsert();
         try {
             stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -305,6 +316,7 @@ public class CalendarEventController{
 
     /**
      * Updates a calendar event in the database
+     *
      * @param taskId the id of the task to be updated
      * @throws SQLException
      */
@@ -316,20 +328,19 @@ public class CalendarEventController{
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         QueryBuilder sql = qb.update("task_calendar_db.calendar_events ce")
-                            .join("task_calendar_db.calendar_events_tags cet", "ce.id = cet.calendar_event_id", Optional.empty())
-                            .set("ce.description = " + description)
-                            .set("ce.start_date = " + startDate)
-                            .set("ce.end_date = " + endDate)
-                            .set("ce.user_id = " + userId);
+                .join("task_calendar_db.calendar_events_tags cet", "ce.id = cet.calendar_event_id", Optional.empty())
+                .set("ce.description = " + description)
+                .set("ce.start_date = " + startDate)
+                .set("ce.end_date = " + endDate)
+                .set("ce.user_id = " + userId);
         for (int i = 0; i < tags.size(); i++) {
             sql = sql.set("cet.tag_id = " + tags.get(i));
         }
         String finalSql = sql.where("ce.id = " + taskId)
-                            .buildUpdate();
+                .buildUpdate();
         try {
             stmt.executeUpdate(finalSql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         closeConnection();
@@ -337,6 +348,7 @@ public class CalendarEventController{
 
     /**
      * Deletes a calendar event from the database
+     *
      * @param taskId the id of the task to be deleted
      * @throws SQLException
      */
@@ -348,14 +360,18 @@ public class CalendarEventController{
         Statement stmt = conn.createStatement();
         QueryBuilder qb = new QueryBuilder();
         String sql = qb.delete("task_calendar_db.calendar_events")
-                        .where("id = " + taskId)
-                        .buildDelete();
+                .where("id = " + taskId)
+                .buildDelete();
         try {
             stmt.executeQuery(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         closeConnection();
     }
 }
+
+
+
+
+
