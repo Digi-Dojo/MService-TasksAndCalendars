@@ -17,11 +17,10 @@ public class TaskService {
 //    This class should contain business logic related to Tasks, including methods for creating,
 //    updating, and deleting Task entities. It should also provide methods for retrieving Task entities from the TaskRepository
 
+    @Autowired
     private TaskRepository taskRepo;
 
     //This class manages the tasks in the local TaskRepository
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
     public TaskService(TaskRepository taskRepo){
         this.taskRepo = taskRepo;
     }

@@ -29,7 +29,6 @@ dependencies {
 }
 
 
-
 test {
     useJUnitPlatform()
     include 'it/unibz/taskcalendarservice/domain/CalendarEventRepositoryTest.class'

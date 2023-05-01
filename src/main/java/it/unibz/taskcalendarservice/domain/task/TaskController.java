@@ -10,6 +10,7 @@ import it.unibz.taskcalendarservice.application.task.Status;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 
 import java.sql.*;
@@ -19,14 +20,9 @@ import java.util.Optional;
 public class TaskController {
 //     This class should handle HTTP requests related to Tasks, including creating, updating,
 //     deleting, and retrieving Task entities. It should delegate to the TaskService to perform business logic
-
-    @Value("${spring.datasource.url}")
     private String dbUrl;
-    @Value("${spring.datasource.username}")
     private String dbUsername;
-    @Value("${spring.datasource.password}")
     private String dbPassword;
-    @Value("${spring.datasource.driver-class-name}")
     private String dbDriver;
 
     private Connection conn;
@@ -36,7 +32,6 @@ public class TaskController {
     private Place place;
     private List<String> tags;
 
-    @Autowired
     public TaskController(String description, Status taskStatus, User relatedUser, Place relatedPlace, List<String> tags){}
     public TaskController(){    }
 
