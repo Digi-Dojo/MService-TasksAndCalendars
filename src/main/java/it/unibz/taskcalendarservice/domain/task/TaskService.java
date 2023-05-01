@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-<<<<<<< HEAD:src/main/java/it/unibz/taskcalendarservice/TaskService.java
 
-=======
->>>>>>> af024f8d9bdb44c7d9ebd9abc53e806c7faabef5:src/main/java/it/unibz/taskcalendarservice/domain/task/TaskService.java
 @Service
 public class TaskService {
 //    This class should contain business logic related to Tasks, including methods for creating,

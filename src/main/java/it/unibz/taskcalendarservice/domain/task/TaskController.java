@@ -1,7 +1,5 @@
 package it.unibz.taskcalendarservice.domain.task;
 
-<<<<<<< HEAD:src/main/java/it/unibz/taskcalendarservice/TaskController.java
-=======
 import it.unibz.taskcalendarservice.QueryBuilder;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
@@ -10,7 +8,6 @@ import it.unibz.taskcalendarservice.application.task.Status;
 
 
 import org.jetbrains.annotations.NotNull;
->>>>>>> af024f8d9bdb44c7d9ebd9abc53e806c7faabef5:src/main/java/it/unibz/taskcalendarservice/domain/task/TaskController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -40,13 +37,10 @@ public class TaskController {
     private List<String> tags;
 
     @Autowired
-<<<<<<< HEAD:src/main/java/it/unibz/taskcalendarservice/TaskController.java
-    public TaskController(String description, Task.Status taskStatus, User relatedUser, Place relatedPlace, List<String> tags){
-=======
+    public TaskController(String description, Status taskStatus, User relatedUser, Place relatedPlace, List<String> tags){}
     public TaskController(){    }
 
      public TaskController(String description, Status status) {
->>>>>>> af024f8d9bdb44c7d9ebd9abc53e806c7faabef5:src/main/java/it/unibz/taskcalendarservice/domain/task/TaskController.java
         this.description = description;
         this.status = status;
     }
