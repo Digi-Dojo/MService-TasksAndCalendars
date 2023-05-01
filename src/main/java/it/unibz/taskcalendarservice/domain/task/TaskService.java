@@ -19,7 +19,6 @@ public class TaskService {
     private TaskRepository taskRepo;
 
     //This class manages the tasks in the local TaskRepository
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     public TaskService(TaskRepository taskRepo){
         this.taskRepo = taskRepo;
