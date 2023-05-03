@@ -3,10 +3,12 @@ package it.unibz.taskcalendarservice.application.calendar;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class CalendarEvent {
 
     private String description;

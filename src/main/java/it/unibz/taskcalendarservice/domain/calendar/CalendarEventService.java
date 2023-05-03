@@ -25,7 +25,7 @@ public class CalendarEventService {
         return calendarEventRepository.findAll();
     }
 
-    public Optional<Object> findById(Long id) {
+    public Optional<CalendarEvent> findById(Long id) {
         return calendarEventRepository.findById(id);
     }
 
