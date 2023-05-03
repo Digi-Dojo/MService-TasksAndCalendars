@@ -2,15 +2,16 @@ package it.unibz.taskcalendarservice.application.task;
 
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
-
-
+@Entity
 public class Task {
 
     @Id

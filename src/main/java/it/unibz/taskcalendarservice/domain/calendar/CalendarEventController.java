@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import it.unibz.taskcalendarservice.QueryBuilder;
-import it.unibz.taskcalendarservice.application.Place;
+import it.unibz.taskcalendarservice.application.*;
 import it.unibz.taskcalendarservice.application.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
