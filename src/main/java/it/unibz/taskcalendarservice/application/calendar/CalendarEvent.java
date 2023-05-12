@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class CalendarEvent {
@@ -19,49 +20,16 @@ public class CalendarEvent {
     private List<String> tags;// same as on the task (array is better)
 
     //Constructors
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate) {
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.place = place.orElse(null);
+        this.user = user.orElse(null);
+        this.tags = tags.orElse(null);
+        assert place.isEmpty() || user.isEmpty();
     }
 
-
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Place place) {
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.place = place;
-    }
-
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, User user) {
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.user = user;
-    }
-
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, List<String> tags) {
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.tags = tags;
-    }
-    
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Place place, List<String> tags) {
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.place = place;
-        this.tags = tags;
-    }
-
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, User user, List<String> tags) {
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.user = user;
-        this.tags = tags;
-    }
 
     //Getters and Setters
     public String getDescription() {

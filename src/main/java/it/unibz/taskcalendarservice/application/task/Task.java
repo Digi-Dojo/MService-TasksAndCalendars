@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Entity
 public class Task {
 
@@ -25,37 +27,17 @@ public class Task {
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
     //Constructors
-    public Task(String description, Status status) {
+
+    public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.description = description;
         this.status = status;
+        this.user = user.orElse(null);
+        this.place = place.orElse(null);
+        this.tags = tags.orElse(null);
+
+        assert user.isEmpty() || place.isEmpty();
     }
-    public Task(String description, Status status, Place place) {
-        this.description = description;
-        this.status = status;
-        this.place = place;
-    }
-    public Task(String description, Status status, User user) {
-        this.description = description;
-        this.status = status;
-        this.user = user;
-    }
-    public Task(String description, Status status, List<String> tags) {
-        this.description = description;
-        this.status = status;
-        this.tags = tags;
-    }
-    public Task(String description, Status status, User user, List<String> tags) {
-        this.description = description;
-        this.status = status;
-        this.user = user;
-        this.tags = tags;
-    }
-    public Task(String description, Status status, Place place, List<String> tags) {
-        this.description = description;
-        this.status = status;
-        this.place = place;
-        this.tags = tags;
-    }
+
 
     //Getters and Setters
     public Long getId(){
