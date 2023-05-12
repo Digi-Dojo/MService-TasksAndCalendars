@@ -3,7 +3,7 @@ package it.unibz.taskcalendarservice.application.calendar;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,9 @@ import java.util.Optional;
 @Entity
 public class CalendarEvent {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -20,6 +23,17 @@ public class CalendarEvent {
     private List<String> tags;// same as on the task (array is better)
 
     //Constructors
+    public CalendarEvent(Long id , String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
+        this.id = id;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.place = place.orElse(null);
+        this.user = user.orElse(null);
+        this.tags = tags.orElse(null);
+        assert place.isEmpty() || user.isEmpty();
+    }
+
     public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
         this.description = description;
         this.startDate = startDate;

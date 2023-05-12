@@ -3,6 +3,7 @@ package it.unibz.taskcalendarservice.domain.calendar;
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 import it.unibz.taskcalendarservice.application.calendar.CalendarEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class CRUDCalendarEvent {
     private final CalendarEventRepository calendarEventRepository;
     private final SearchCalendarEvent searchCalendarEvent;
 
+    @Autowired
     public CRUDCalendarEvent(CalendarEventRepository calendarEventRepository, SearchCalendarEvent searchCalendarEvent) {
         this.calendarEventRepository = calendarEventRepository;
         this.searchCalendarEvent = searchCalendarEvent;

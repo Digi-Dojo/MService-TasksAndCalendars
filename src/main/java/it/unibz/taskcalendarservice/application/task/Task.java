@@ -37,7 +37,16 @@ public class Task {
 
         assert user.isEmpty() || place.isEmpty();
     }
+    public Task(Long id, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
+        this.id = id;
+        this.description = description;
+        this.status = status;
+        this.user = user.orElse(null);
+        this.place = place.orElse(null);
+        this.tags = tags.orElse(null);
 
+        assert user.isEmpty() || place.isEmpty();
+    }
 
     //Getters and Setters
     public Long getId(){
