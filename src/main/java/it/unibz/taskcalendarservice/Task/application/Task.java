@@ -1,14 +1,12 @@
-package it.unibz.taskcalendarservice.application.task;
+package it.unibz.taskcalendarservice.Task.application;
 
-import it.unibz.taskcalendarservice.application.Place;
-import it.unibz.taskcalendarservice.application.User;
-import org.springframework.stereotype.Component;
+import it.unibz.taskcalendarservice.Place;
+import it.unibz.taskcalendarservice.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

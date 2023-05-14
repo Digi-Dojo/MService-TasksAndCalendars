@@ -1,7 +1,7 @@
-package it.unibz.taskcalendarservice.application.calendar;
+package it.unibz.taskcalendarservice.Calendar.application;
 
-import it.unibz.taskcalendarservice.application.Place;
-import it.unibz.taskcalendarservice.application.User;
+import it.unibz.taskcalendarservice.Place;
+import it.unibz.taskcalendarservice.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

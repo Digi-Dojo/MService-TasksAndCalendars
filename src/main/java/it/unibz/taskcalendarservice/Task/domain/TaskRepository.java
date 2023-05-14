@@ -1,6 +1,7 @@
-package it.unibz.taskcalendarservice.domain.task;
+package it.unibz.taskcalendarservice.Task.domain;
 
-import it.unibz.taskcalendarservice.application.task.Task;
+import it.unibz.taskcalendarservice.Task.application.Task;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    public Task save(Task task);
+    public <T> T save(Task task, Class<T> type);
 
-    public List<Task> findAll();
+    public @NotNull List<Task> findAll();
 
     public Optional<Task> findById(long id);
 
-    public void delete(Task task);
+    public void delete(@NotNull Task task);
 }

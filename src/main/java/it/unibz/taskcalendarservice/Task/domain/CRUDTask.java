@@ -1,9 +1,9 @@
-package it.unibz.taskcalendarservice.domain.task;
+package it.unibz.taskcalendarservice.Task.domain;
 
-import it.unibz.taskcalendarservice.application.Place;
-import it.unibz.taskcalendarservice.application.User;
-import it.unibz.taskcalendarservice.application.task.Status;
-import it.unibz.taskcalendarservice.application.task.Task;
+import it.unibz.taskcalendarservice.Place;
+import it.unibz.taskcalendarservice.User;
+import it.unibz.taskcalendarservice.Task.application.Status;
+import it.unibz.taskcalendarservice.Task.application.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class CRUDTask {
     }
 
     public Task createTask(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
-        return taskRepository.save(new Task(description, status, user, place, tags));
+        return taskRepository.save(new Task(description, status, user, place, tags), Task.class);
     }
 
     public Task updateTask(Long taskID, Optional<String> description, Optional<Status> status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
@@ -33,7 +33,7 @@ public class CRUDTask {
         place.ifPresent(toBeModified::setPlace);
         tags.ifPresent(toBeModified::setTags);
         assert user.isEmpty() || place.isEmpty();
-        return taskRepository.save(toBeModified);
+        return taskRepository.save(toBeModified, Task.class);
     }
 
     public boolean deleteTask(Long id){
