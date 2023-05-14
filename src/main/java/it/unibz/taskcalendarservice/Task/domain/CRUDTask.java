@@ -27,12 +27,6 @@ public class CRUDTask {
 
     public Task updateTask(Long taskID, Optional<String> description, Optional<Status> status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
         Task toBeModified = searchTask.findById(taskID);
-        description.ifPresent(toBeModified::setDescription);
-        status.ifPresent(toBeModified::setStatus);
-        user.ifPresent(toBeModified::setUser);
-        place.ifPresent(toBeModified::setPlace);
-        tags.ifPresent(toBeModified::setTags);
-        assert user.isEmpty() || place.isEmpty();
         return taskRepository.save(toBeModified, Task.class);
     }
 
