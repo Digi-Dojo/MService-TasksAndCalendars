@@ -1,7 +1,7 @@
 package it.unibz.taskcalendarservice.Calendar.application;
 
-import it.unibz.taskcalendarservice.Place;
-import it.unibz.taskcalendarservice.User;
+import it.unibz.taskcalendarservice.Calendar.Place;
+import it.unibz.taskcalendarservice.Calendar.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,8 +18,12 @@ public class CalendarEvent {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    @Embedded
     private User user;
+
+    @Embedded
     private Place place;
+
     private List<String> tags;// same as on the task (array is better)
 
     //Constructors
