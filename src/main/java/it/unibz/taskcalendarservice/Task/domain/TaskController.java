@@ -1,7 +1,7 @@
 package it.unibz.taskcalendarservice.Task.domain;
 
-import it.unibz.taskcalendarservice.Place;
-import it.unibz.taskcalendarservice.User;
+import it.unibz.taskcalendarservice.Calendar.Place;
+import it.unibz.taskcalendarservice.Calendar.User;
 import it.unibz.taskcalendarservice.Task.application.Status;
 import it.unibz.taskcalendarservice.Task.application.Task;
 import org.springframework.beans.factory.annotation.Autowired;

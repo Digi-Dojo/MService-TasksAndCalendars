@@ -1,4 +1,11 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.Calendar;
 
-public record Place(Long id, String name) {
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Place {
+    private Long id;
+    private String name;
+
+    // Getters, setters, no-args constructor
 }

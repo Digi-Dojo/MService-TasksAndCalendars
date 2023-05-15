@@ -1,7 +1,7 @@
 package it.unibz.taskcalendarservice.Task.application;
 
-import it.unibz.taskcalendarservice.Place;
-import it.unibz.taskcalendarservice.User;
+import it.unibz.taskcalendarservice.Calendar.Place;
+import it.unibz.taskcalendarservice.Calendar.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

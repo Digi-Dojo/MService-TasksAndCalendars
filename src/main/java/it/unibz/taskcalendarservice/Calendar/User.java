@@ -1,5 +1,11 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.Calendar;
 
+import javax.persistence.Embeddable;
 
-public record User(Long id, String name) {
+@Embeddable
+public class User {
+    private Long id;
+    private String name;
+
+    // Getters, setters, no-args constructor
 }

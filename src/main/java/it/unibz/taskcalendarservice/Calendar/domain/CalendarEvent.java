@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.Calendar.application;
+package it.unibz.taskcalendarservice.Calendar.domain;
 
 import it.unibz.taskcalendarservice.Calendar.Place;
 import it.unibz.taskcalendarservice.Calendar.User;
