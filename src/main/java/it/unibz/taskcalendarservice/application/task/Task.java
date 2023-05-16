@@ -26,8 +26,7 @@ public class Task {
     private Place place;
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
-    //Constructors
-
+    //Constructor
     public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.description = description;
         this.status = status;
