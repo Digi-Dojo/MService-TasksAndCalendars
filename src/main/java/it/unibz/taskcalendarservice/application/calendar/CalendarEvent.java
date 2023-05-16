@@ -2,14 +2,17 @@ package it.unibz.taskcalendarservice.application.calendar;
 
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
+import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Entity
+@ComponentScan(basePackages = {"it.unibz.taskcalendarservice.application.Place"})
 @Table(name = "calendar_events")
 public class CalendarEvent {
 
@@ -19,11 +22,17 @@ public class CalendarEvent {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    @Transient
     private User user;
+    @Transient
     private Place place;
     private List<String> tags;// same as on the task (array is better)
 
+    public CalendarEvent() {
+    }
+
     //Constructors
+    @Autowired
     public CalendarEvent(Long id , String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
         this.id = id;
         this.description = description;
@@ -35,6 +44,7 @@ public class CalendarEvent {
         assert place.isEmpty() || user.isEmpty();
     }
 
+    @Autowired
     public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
         this.description = description;
         this.startDate = startDate;
