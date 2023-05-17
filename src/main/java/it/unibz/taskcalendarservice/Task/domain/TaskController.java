@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/tasks")
+@RequestMapping(path = "../api/tasks", method = RequestMethod.GET)
 public class TaskController {
 
     private final CRUDTask crudTask;
@@ -21,6 +21,11 @@ public class TaskController {
     public TaskController(CRUDTask crudTask, SearchTask searchTask) {
         this.crudTask = crudTask;
         this.searchTask = searchTask;
+    }
+
+    @GetMapping("/sayhello")
+    public String sayHelloWorld(){
+        return "Hello World!";
     }
 
     @GetMapping("/{id}")

@@ -1,17 +1,16 @@
-package it.unibz.taskcalendarservice.Task.application;
+package it.unibz.taskcalendarservice.application.task;
 
-import it.unibz.taskcalendarservice.Calendar.Place;
-import it.unibz.taskcalendarservice.Calendar.User;
+import it.unibz.taskcalendarservice.application.Place;
+import it.unibz.taskcalendarservice.application.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
 
     @Id
@@ -20,12 +19,17 @@ public class Task {
 
     private String description;
     private Status status;
+    @Transient
     private User user;
+    @Transient
     private Place place;
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
-    //Constructors
+    public Task() {
+    }
 
+    //Constructor
+    @Autowired
     public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.description = description;
         this.status = status;
@@ -35,6 +39,8 @@ public class Task {
 
         assert user.isEmpty() || place.isEmpty();
     }
+
+    @Autowired
     public Task(Long id, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.id = id;
         this.description = description;
