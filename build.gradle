@@ -12,6 +12,7 @@ repositories {
     maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
     maven { url "https://repo.spring.io/release" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -26,6 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.6'
     implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'com.julienvey.trello:trello-java-wrapper:0.3.2'
 }
 test {
     useJUnitPlatform()

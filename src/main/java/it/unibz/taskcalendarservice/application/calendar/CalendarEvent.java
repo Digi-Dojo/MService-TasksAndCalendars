@@ -4,7 +4,6 @@ import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,10 +16,14 @@ public class CalendarEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private String trelloCardId;
+
+    private String title;
     @Transient
     private User user;
     @Transient
@@ -118,5 +121,18 @@ public class CalendarEvent {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getTrelloCardId() {
+
+        return trelloCardId;
+    }
+
+    public void setTrelloCardId(String trelloCardId) {
+        this.trelloCardId = trelloCardId;
     }
 }
