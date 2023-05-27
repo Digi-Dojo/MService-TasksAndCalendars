@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -25,7 +23,8 @@ public class TaskRepositoryTest {
         String description = "Task description";
         Status status = Status.DONE;
 
-        Task task = new Task(taskId, description, status, Optional.empty(), Optional.empty(), Optional.empty());
+       // TaskRequest taskRequest = new TaskRequest(description, status, null, null, null);
+        Task task = new Task(description, status,null,null,null);
 
         // Save the task
         Task savedTask = taskRepository.save(task);
@@ -37,4 +36,3 @@ public class TaskRepositoryTest {
         assertEquals(status, savedTask.getStatus());
     }
 }
-
