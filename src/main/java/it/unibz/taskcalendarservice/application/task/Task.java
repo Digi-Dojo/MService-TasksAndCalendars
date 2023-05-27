@@ -2,51 +2,59 @@ package it.unibz.taskcalendarservice.application.task;
 
 import it.unibz.taskcalendarservice.application.Place;
 import it.unibz.taskcalendarservice.application.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
-
-    @Enumerated(EnumType.STRING)
     private Status status;
+    @Transient
+    private User user;
+    @Transient
+    private Place place;
+    private List<String> tags; // probabilmente array è meglio per indicizzare
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Optional<User> user;
+    public Task() {
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Optional<Place> place;
-
-    @ElementCollection
-    @CollectionTable(name = "task_tags", joinColumns = @JoinColumn(name = "task_id"))
-    @Column(name = "tag")
-    private Optional<List<String>> tags;
-
-
+    //Constructor
+    @Autowired
     public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.description = description;
         this.status = status;
-        this.user = user;
-        this.place = place;
-        this.tags = tags;
+        this.user = user.orElse(null);
+        this.place = place.orElse(null);
+        this.tags = tags.orElse(null);
+
+        assert user.isEmpty() || place.isEmpty();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    @Autowired
+    public Task(Long id, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.id = id;
+        this.description = description;
+        this.status = status;
+        this.user = user.orElse(null);
+        this.place = place.orElse(null);
+        this.tags = tags.orElse(null);
+
+        assert user.isEmpty() || place.isEmpty();
+    }
+
+    //Getters and Setters
+    public Long getId(){
+        return id;
     }
 
     public String getDescription() {
@@ -65,24 +73,35 @@ public class Task {
         this.status = status;
     }
 
-    public Optional<User> getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
-        this.user = Optional.ofNullable(user);
+        this.user = user;
     }
 
-    public Optional<Place> getPlace() {
+    public Place getPlace() {
         return place;
     }
 
     public void setPlace(Place place) {
-        this.place = Optional.ofNullable(place);
+        this.place = place;
+    }
+
+    public List<String> getTags() {
+        return tags;
     }
 
     public void setTags(List<String> tags) {
-        this.tags = Optional.ofNullable(tags);
+        this.tags = tags;
+    }
+
+    //Methods
+    public void addTag(String tag) {
+        if (tags == null) {
+            tags = new ArrayList<>();
+        }
+        tags.add(tag);
     }
 }
-
