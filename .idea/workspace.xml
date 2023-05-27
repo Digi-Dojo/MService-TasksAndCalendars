@@ -5,35 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b8ace5b-df68-4d29-afb3-36cb9ca30259" name="Changes" comment="merging conflicts">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/organization.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/query" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/TaskAndCalendarServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/application/Place.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/application/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/application/calendar/CalendarEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/application/calendar/CalendarEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/application/task/Status.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/application/task/Task.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/calendar/CRUDCalendarEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/calendar/CalendarEventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/calendar/CalendarEventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/calendar/CalendarEventRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/calendar/SearchCalendarEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/task/CRUDTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/task/SearchTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/task/TaskController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibz/taskcalendarservice/domain/task/TaskRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/unibz/taskcalendarservice/database/DatabaseConfigTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/unibz/taskcalendarservice/domain/CalendarEventRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/unibz/taskcalendarservice/domain/CalendarEventServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/unibz/taskcalendarservice/domain/TaskRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/unibz/taskcalendarservice/domain/TaskRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/unibz/taskcalendarservice/domain/TaskServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,17 +33,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MService-TasksAndCalendars" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="MService-TasksAndCalendars" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
