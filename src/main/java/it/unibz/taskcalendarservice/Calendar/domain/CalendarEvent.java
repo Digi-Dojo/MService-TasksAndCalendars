@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
-@ComponentScan(basePackages = {"it.unibz.taskcalendarservice.application.Place"})
 @Table(name = "calendar_events")
 public class CalendarEvent {
 
