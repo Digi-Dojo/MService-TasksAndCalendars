@@ -2,9 +2,9 @@
 //
 //import it.unibz.taskcalendarservice.application.Place;
 //import it.unibz.taskcalendarservice.application.User;
-//import it.unibz.taskcalendarservice.application.calendar.CalendarEvent;
-//import it.unibz.taskcalendarservice.domain.calendar.CalendarEventController;
-//import it.unibz.taskcalendarservice.domain.calendar.CalendarEventRepository;
+//import it.unibz.taskcalendarservice.application.calendar.application.CalendarEvent;
+//import it.unibz.taskcalendarservice.domain.calendar.domain.CalendarEventController;
+//import it.unibz.taskcalendarservice.domain.calendar.domain.CalendarEventRepository;
 //import it.unibz.taskcalendarservice.domain.calendar.CalendarEventService;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;

@@ -1,6 +1,5 @@
-package it.unibz.taskcalendarservice.domain.calendar;
+package it.unibz.taskcalendarservice.Calendar.domain;
 
-import it.unibz.taskcalendarservice.application.calendar.CalendarEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

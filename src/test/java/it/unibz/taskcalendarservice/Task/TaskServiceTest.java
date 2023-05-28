@@ -1,9 +1,9 @@
 //package it.unibz.taskcalendarservice.domain;
 //
 //import it.unibz.taskcalendarservice.application.User;
-//import it.unibz.taskcalendarservice.application.task.Task;
-//import it.unibz.taskcalendarservice.application.task.Status;
-//import it.unibz.taskcalendarservice.domain.task.TaskRepository;
+//import it.unibz.taskcalendarservice.application.task.application.Task;
+//import it.unibz.taskcalendarservice.application.task.application.Status;
+//import it.unibz.taskcalendarservice.domain.task.domain.TaskRepository;
 //import it.unibz.taskcalendarservice.domain.task.TaskService;
 //import org.junit.jupiter.api.Test;
 //import org.mockito.Mock;
