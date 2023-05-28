@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice;
+package it.unibz.taskcalendarservice.Task;
 
 public class CalendarEventServiceTest {
 }

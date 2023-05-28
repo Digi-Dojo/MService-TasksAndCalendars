@@ -6,6 +6,7 @@
 
 **Mirko**: [TaskController](src/main/java/it/unibz/taskcalendarservice/TaskController.java),
 
-**Antonio**: to be determined,
+**Antonio**: [CalendarEventService](src/main/java/it/unibz/taskcalendarservice/CalendarEventService.java),
 
-**Alessio**: to be determined.
+**Alessio**: [Task](src/main/java/it/unibz/taskcalendarservice/Task.java),
+             [TaskService](src/main/java/it/unibz/taskcalendarservice/TaskService.java)
