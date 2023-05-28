@@ -2,7 +2,7 @@
 //
 //import it.unibz.taskcalendarservice.application.Place;
 //import it.unibz.taskcalendarservice.application.User;
-//import it.unibz.taskcalendarservice.domain.calendar.CalendarEventController;
+//import it.unibz.taskcalendarservice.domain.calendar.domain.CalendarEventController;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.function.Executable;
 //
