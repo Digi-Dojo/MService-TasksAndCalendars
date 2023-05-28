@@ -1,7 +1,7 @@
-package it.unibz.taskcalendarservice.application.task;
+package it.unibz.taskcalendarservice.task.domain;
 
-import it.unibz.taskcalendarservice.application.Place;
-import it.unibz.taskcalendarservice.application.User;
+import it.unibz.taskcalendarservice.common.domain.Place;
+import it.unibz.taskcalendarservice.common.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.*;

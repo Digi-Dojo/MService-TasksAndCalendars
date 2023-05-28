@@ -1,8 +1,8 @@
 //package it.unibz.taskcalendarservice.database;
 //
-//import it.unibz.taskcalendarservice.application.Place;
-//import it.unibz.taskcalendarservice.application.User;
-//import it.unibz.taskcalendarservice.domain.calendar.CalendarEventController;
+//import it.unibz.taskcalendarservice.common.domain.Place;
+//import it.unibz.taskcalendarservice.common.domain.User;
+//import it.unibz.taskcalendarservice.calendar.application.CalendarEventController;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.function.Executable;
 //

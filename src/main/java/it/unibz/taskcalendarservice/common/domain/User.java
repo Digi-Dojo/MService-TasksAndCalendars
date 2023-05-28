@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.application;
+package it.unibz.taskcalendarservice.common.domain;
 
 import jakarta.persistence.*;
 

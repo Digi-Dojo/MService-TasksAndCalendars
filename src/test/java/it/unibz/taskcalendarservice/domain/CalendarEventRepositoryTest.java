@@ -1,10 +1,10 @@
 //package it.unibz.taskcalendarservice.domain;
 //
-//import it.unibz.taskcalendarservice.application.Place;
-//import it.unibz.taskcalendarservice.application.User;
-//import it.unibz.taskcalendarservice.application.calendar.CalendarEvent;
-//import it.unibz.taskcalendarservice.domain.calendar.CalendarEventController;
-//import it.unibz.taskcalendarservice.domain.calendar.CalendarEventRepository;
+//import it.unibz.taskcalendarservice.common.domain.Place;
+//import it.unibz.taskcalendarservice.common.domain.User;
+//import it.unibz.taskcalendarservice.calendar.domain.CalendarEvent;
+//import it.unibz.taskcalendarservice.calendar.application.CalendarEventController;
+//import it.unibz.taskcalendarservice.calendar.domain.CalendarEventRepository;
 //import it.unibz.taskcalendarservice.domain.calendar.CalendarEventService;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
