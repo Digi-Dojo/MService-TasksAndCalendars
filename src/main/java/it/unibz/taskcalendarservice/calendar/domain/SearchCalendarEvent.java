@@ -23,6 +23,7 @@ public class SearchCalendarEvent {
 
     public List<CalendarEvent> getAll(){
         List<CalendarEvent> calendarEvents = calendarEventRepository.findAll();
+        System.out.println("\nCalendarEventsList size: " + calendarEvents.size());
         if (calendarEvents.size() == 0) throw new IllegalArgumentException("No calendar events were found");
         return calendarEvents;
     }

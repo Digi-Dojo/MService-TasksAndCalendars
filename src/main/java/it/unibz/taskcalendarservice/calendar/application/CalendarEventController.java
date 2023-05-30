@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/calendar-event", method = RequestMethod.GET )
+@RequestMapping(path = "api/calendar-events")
 public class CalendarEventController {
     private final CRUDCalendarEvent crudCalendarEvent;
     private final SearchCalendarEvent searchCalendarEvent;

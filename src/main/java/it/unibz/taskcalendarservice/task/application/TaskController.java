@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/tasks")
+@RequestMapping(path = "api/tasks")
 public class TaskController {
 
     private final CRUDTask crudTask;
