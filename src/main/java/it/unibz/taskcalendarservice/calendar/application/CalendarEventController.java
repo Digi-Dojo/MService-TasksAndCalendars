@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/calendar-events")
 public class CalendarEventController {
@@ -30,7 +31,7 @@ public class CalendarEventController {
     }
 
     @PostMapping("/create")
-    public CalendarEvent createTask (String description, java.time.LocalDateTime startDate, LocalDateTime endDate,
+    public CalendarEvent createCalendarEvent (String description, java.time.LocalDateTime startDate, LocalDateTime endDate,
                                      Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
         return crudCalendarEvent.createCalendarEvent(description, startDate, endDate, place, user, tags);
     }
