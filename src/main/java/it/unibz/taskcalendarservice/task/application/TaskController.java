@@ -41,8 +41,8 @@ public class TaskController {
     }
 
      @PostMapping("/create")
-    public Task createTask(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
-        return crudTask.createTask(description, status, user, place, tags);
+    public Task createTask(String title, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
+        return crudTask.createTask(title, description, status, user, place, tags);
     }
 
     @PostMapping("/update/{id}")

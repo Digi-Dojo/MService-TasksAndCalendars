@@ -17,7 +17,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private String description, title;
     private Status status;
     @Transient
     private User user;
@@ -30,25 +30,25 @@ public class Task {
 
     //Constructor
     @Autowired
-    public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
+    public Task(String description, String title, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.description = description;
         this.status = status;
         this.user = user.orElse(null);
         this.place = place.orElse(null);
         this.tags = tags.orElse(null);
-
+        this.title = title;
         assert user.isEmpty() || place.isEmpty();
     }
 
     @Autowired
-    public Task(Long id, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
+    public Task(Long id, String description, String title, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.id = id;
         this.description = description;
         this.status = status;
         this.user = user.orElse(null);
         this.place = place.orElse(null);
         this.tags = tags.orElse(null);
-
+        this.title = title;
         assert user.isEmpty() || place.isEmpty();
     }
 
@@ -65,6 +65,13 @@ public class Task {
         this.description = description;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
     public Status getStatus() {
         return status;
     }
