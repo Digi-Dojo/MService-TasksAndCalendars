@@ -24,8 +24,6 @@ public class SearchTask {
     public List<Task> getAll(){
         List<Task> tasks = taskRepository.findAll();
         System.out.println("\nTaskList size: " + tasks.size());
-
-        if (tasks.size() == 0) throw new IllegalArgumentException("No tasks were found");
         return tasks;
     }
 }
