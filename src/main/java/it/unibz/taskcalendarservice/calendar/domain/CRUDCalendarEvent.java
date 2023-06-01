@@ -20,12 +20,12 @@ public class CRUDCalendarEvent {
         this.searchCalendarEvent = searchCalendarEvent;
     }
 
-    public CalendarEvent createCalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place,
+    public CalendarEvent createCalendarEvent(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place,
                                              Optional<User> user, Optional<List<String>> tags){
-        return calendarEventRepository.save(new CalendarEvent(description, startDate, endDate, place, user, tags));
+        return calendarEventRepository.save(new CalendarEvent(title, description, startDate, endDate, place, user, tags));
     }
 
-    public CalendarEvent updateCalendarEvent(Long calendarEventID, Optional<String> description, Optional<LocalDateTime> startDate,
+    public CalendarEvent updateCalendarEvent(Long calendarEventID, String title, Optional<String> description, Optional<LocalDateTime> startDate,
                                              Optional<LocalDateTime> endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
         CalendarEvent toBeModified = searchCalendarEvent.findById(calendarEventID);
         description.ifPresent(toBeModified::setDescription);
