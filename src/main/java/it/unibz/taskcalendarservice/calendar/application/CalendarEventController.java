@@ -31,15 +31,15 @@ public class CalendarEventController {
     }
 
     @PostMapping("/create")
-    public CalendarEvent createCalendarEvent (String description, java.time.LocalDateTime startDate, LocalDateTime endDate,
+    public CalendarEvent createCalendarEvent (String title, String description, java.time.LocalDateTime startDate, LocalDateTime endDate,
                                      Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
-        return crudCalendarEvent.createCalendarEvent(description, startDate, endDate, place, user, tags);
+        return crudCalendarEvent.createCalendarEvent(title, description, startDate, endDate, place, user, tags);
     }
 
     @PostMapping("/update/{id}")
-    public CalendarEvent updateCalendarEvent(Long calendarEventID, Optional<String> description, Optional<LocalDateTime> startDate,
+    public CalendarEvent updateCalendarEvent(Long calendarEventID, String title, Optional<String> description, Optional<LocalDateTime> startDate,
                                              Optional<LocalDateTime> endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
-        return crudCalendarEvent.updateCalendarEvent(calendarEventID, description, startDate, endDate, place, user, tags);
+        return crudCalendarEvent.updateCalendarEvent(calendarEventID, title, description, startDate, endDate, place, user, tags);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -20,6 +20,8 @@ public class CalendarEvent {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+
+    private String title;
     @Transient
     private User user;
     @Transient
@@ -31,7 +33,7 @@ public class CalendarEvent {
 
     //Constructors
     @Autowired
-    public CalendarEvent(Long id , String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
+    public CalendarEvent(Long id , String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
         this.id = id;
         this.description = description;
         this.startDate = startDate;
@@ -39,17 +41,19 @@ public class CalendarEvent {
         this.place = place.orElse(null);
         this.user = user.orElse(null);
         this.tags = tags.orElse(null);
+        this.title = title;
         assert place.isEmpty() || user.isEmpty();
     }
 
     @Autowired
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
+    public CalendarEvent(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.place = place.orElse(null);
         this.user = user.orElse(null);
         this.tags = tags.orElse(null);
+        this.title = title;
         assert place.isEmpty() || user.isEmpty();
     }
 
@@ -73,6 +77,14 @@ public class CalendarEvent {
 
     public LocalDateTime getEndDate() {
         return endDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setEndDate(LocalDateTime endDate) {
