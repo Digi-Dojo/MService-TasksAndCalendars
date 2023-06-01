@@ -22,7 +22,7 @@ public class CRUDCalendarEvent {
 
     public CalendarEvent createCalendarEvent(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place,
                                              Optional<User> user, Optional<List<String>> tags){
-        return calendarEventRepository.save(new CalendarEvent(title, description, startDate, endDate, place, user, tags));
+        return calendarEventRepository.save(new CalendarEvent(description, startDate, endDate, place, user, tags,title));
     }
 
     public CalendarEvent updateCalendarEvent(Long calendarEventID, String title, Optional<String> description, Optional<LocalDateTime> startDate,

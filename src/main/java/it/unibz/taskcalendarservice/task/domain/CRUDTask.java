@@ -19,8 +19,9 @@ public class CRUDTask {
         this.searchTask = searchTask;
     }
 
-    public Task createTask(String title, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
-        return taskRepository.save(new Task(title, description, status, user, place, tags));
+    public Task createTask(String title, String description, Status status, Optional<User> user,
+                           Optional<Place> place, Optional<List<String>> tags){
+        return taskRepository.save(new Task(description, status, user, place, tags, title));
     }
 
     public Task updateTask(Long taskID, Optional<String> description, Optional<Status> status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){

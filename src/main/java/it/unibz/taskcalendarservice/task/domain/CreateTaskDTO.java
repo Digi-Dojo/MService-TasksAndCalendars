@@ -2,59 +2,27 @@ package it.unibz.taskcalendarservice.task.domain;
 
 import it.unibz.taskcalendarservice.common.domain.Place;
 import it.unibz.taskcalendarservice.common.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.Transient;
 
-import jakarta.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Entity
-@Table(name = "tasks")
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class CreateTaskDTO {
     private String description, title;
     private Status status;
-    @Transient
     private User user;
-    @Transient
     private Place place;
     private List<String> tags; // probabilmente array è meglio per indicizzare
 
-    public Task() {
-    }
+    public CreateTaskDTO(){}
 
-    //Constructor
-    @Autowired
-    public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags, String title) {
+    public CreateTaskDTO(String description, String title, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
         this.description = description;
-        this.status = status;
-        this.user = user.orElse(null);
-        this.place = place.orElse(null);
-        this.tags = tags.orElse(null);
         this.title = title;
-        assert user.isEmpty() || place.isEmpty();
-    }
-
-    @Autowired
-    public Task(Long id, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags, String title) {
-        this.id = id;
-        this.description = description;
         this.status = status;
-        this.user = user.orElse(null);
         this.place = place.orElse(null);
+        this.user = user.orElse(null);
         this.tags = tags.orElse(null);
-        this.title = title;
-        assert user.isEmpty() || place.isEmpty();
-    }
-
-    //Getters and Setters
-    public Long getId(){
-        return id;
     }
 
     public String getDescription() {
@@ -72,6 +40,7 @@ public class Task {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public Status getStatus() {
         return status;
     }
@@ -102,13 +71,5 @@ public class Task {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
-    }
-
-    //Methods
-    public void addTag(String tag) {
-        if (tags == null) {
-            tags = new ArrayList<>();
-        }
-        tags.add(tag);
     }
 }

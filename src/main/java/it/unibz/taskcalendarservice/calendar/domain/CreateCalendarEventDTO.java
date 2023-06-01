@@ -2,63 +2,33 @@ package it.unibz.taskcalendarservice.calendar.domain;
 
 import it.unibz.taskcalendarservice.common.domain.Place;
 import it.unibz.taskcalendarservice.common.domain.User;
-import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Entity
-@Table(name = "calendar_events")
-public class CalendarEvent {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CreateCalendarEventDTO {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
     private String title;
-    @Transient
     private User user;
-    @Transient
     private Place place;
-    private List<String> tags;// same as on the task (array is better)
+    private List<String> tags;
 
-    public CalendarEvent() {
-    }
+    public CreateCalendarEventDTO(){}
 
-    //Constructors
-    @Autowired
-    public CalendarEvent(Long id , String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
-        this.id = id;
+    public CreateCalendarEventDTO(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
+        this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.place = place.orElse(null);
         this.user = user.orElse(null);
         this.tags = tags.orElse(null);
-        this.title = title;
-        assert place.isEmpty() || user.isEmpty();
     }
 
-    @Autowired
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags, String title) {
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.place = place.orElse(null);
-        this.user = user.orElse(null);
-        this.tags = tags.orElse(null);
-        this.title = title;
-        assert place.isEmpty() || user.isEmpty();
-    }
-
-
-    //Getters and Setters
     public String getDescription() {
         return description;
     }
@@ -79,16 +49,16 @@ public class CalendarEvent {
         return endDate;
     }
 
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
     }
 
     public User getUser() {
@@ -113,21 +83,5 @@ public class CalendarEvent {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
-    }
-
-    //Methods
-    public void addTag(String tag) {
-        if (tags == null) {
-            tags = new ArrayList<>();
-        }
-        tags.add(tag);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

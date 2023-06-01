@@ -1,5 +1,6 @@
 package it.unibz.taskcalendarservice.calendar.application;
 
+import it.unibz.taskcalendarservice.calendar.domain.CreateCalendarEventDTO;
 import it.unibz.taskcalendarservice.common.domain.Place;
 import it.unibz.taskcalendarservice.common.domain.User;
 import it.unibz.taskcalendarservice.calendar.domain.CalendarEvent;
@@ -31,9 +32,11 @@ public class CalendarEventController {
     }
 
     @PostMapping("/create")
-    public CalendarEvent createCalendarEvent (String title, String description, java.time.LocalDateTime startDate, LocalDateTime endDate,
-                                     Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
-        return crudCalendarEvent.createCalendarEvent(title, description, startDate, endDate, place, user, tags);
+    public CalendarEvent createCalendarEvent (@RequestBody CreateCalendarEventDTO calendarEventDTO){
+        System.out.println("CalendarEvent description: " + calendarEventDTO.getDescription());
+        return crudCalendarEvent.createCalendarEvent(calendarEventDTO.getTitle(), calendarEventDTO.getDescription(),
+                                                    calendarEventDTO.getStartDate(), calendarEventDTO.getEndDate(),
+                Optional.ofNullable(calendarEventDTO.getPlace()), Optional.ofNullable(calendarEventDTO.getUser()), Optional.ofNullable(calendarEventDTO.getTags()));
     }
 
     @PostMapping("/update/{id}")

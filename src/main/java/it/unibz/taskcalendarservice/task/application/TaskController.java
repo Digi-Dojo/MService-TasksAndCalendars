@@ -2,10 +2,7 @@ package it.unibz.taskcalendarservice.task.application;
 
 import it.unibz.taskcalendarservice.common.domain.Place;
 import it.unibz.taskcalendarservice.common.domain.User;
-import it.unibz.taskcalendarservice.task.domain.CRUDTask;
-import it.unibz.taskcalendarservice.task.domain.SearchTask;
-import it.unibz.taskcalendarservice.task.domain.Status;
-import it.unibz.taskcalendarservice.task.domain.Task;
+import it.unibz.taskcalendarservice.task.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,8 +38,10 @@ public class TaskController {
     }
 
      @PostMapping("/create")
-    public Task createTask(String title, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
-        return crudTask.createTask(title, description, status, user, place, tags);
+    public Task createTask(@RequestBody CreateTaskDTO createTaskDTO){
+        return crudTask.createTask(createTaskDTO.getTitle(), createTaskDTO.getDescription(),
+                createTaskDTO.getStatus(), Optional.ofNullable(createTaskDTO.getUser()),
+                Optional.ofNullable(createTaskDTO.getPlace()), Optional.ofNullable(createTaskDTO.getTags()));
     }
 
     @PostMapping("/update/{id}")
