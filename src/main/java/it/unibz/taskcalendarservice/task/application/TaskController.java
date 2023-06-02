@@ -37,11 +37,10 @@ public class TaskController {
         return searchTask.findById(id);
     }
 
-     @PostMapping("/create")
+    @PostMapping("/create")
     public Task createTask(@RequestBody CreateTaskDTO createTaskDTO){
-        return crudTask.createTask(createTaskDTO.getTitle(), createTaskDTO.getDescription(),
-                createTaskDTO.getStatus(), Optional.ofNullable(createTaskDTO.getUser()),
-                Optional.ofNullable(createTaskDTO.getPlace()), Optional.ofNullable(createTaskDTO.getTags()));
+        return crudTask.createTask( createTaskDTO.getDescription(), Optional.ofNullable(createTaskDTO.getPlace()), createTaskDTO.getStatus(),
+                Optional.ofNullable(createTaskDTO.getTags()), createTaskDTO.getTitle(), Optional.ofNullable(createTaskDTO.getUser()));
     }
 
     @PostMapping("/update/{id}")

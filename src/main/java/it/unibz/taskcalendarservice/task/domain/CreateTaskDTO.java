@@ -16,7 +16,7 @@ public class CreateTaskDTO {
 
     public CreateTaskDTO(){}
 
-    public CreateTaskDTO(String description, String title, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags) {
+    public CreateTaskDTO(String description, Optional<Place> place, Status status, Optional<List<String>> tags, String title,  Optional<User> user) {
         this.description = description;
         this.title = title;
         this.status = status;

@@ -30,7 +30,7 @@ public class Task {
 
     //Constructor
     @Autowired
-    public Task(String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags, String title) {
+    public Task(String description, Optional<Place> place, Status status, Optional<List<String>> tags, String title, Optional<User> user) {
         this.description = description;
         this.status = status;
         this.user = user.orElse(null);
@@ -41,7 +41,7 @@ public class Task {
     }
 
     @Autowired
-    public Task(Long id, String description, Status status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags, String title) {
+    public Task(Long id, String description, Optional<Place> place, Status status, Optional<List<String>> tags, String title, Optional<User> user) {
         this.id = id;
         this.description = description;
         this.status = status;
