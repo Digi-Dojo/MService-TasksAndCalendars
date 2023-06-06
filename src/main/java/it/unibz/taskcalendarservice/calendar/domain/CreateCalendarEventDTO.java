@@ -4,6 +4,7 @@ import it.unibz.taskcalendarservice.common.domain.Place;
 import it.unibz.taskcalendarservice.common.domain.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,18 +16,25 @@ public class CreateCalendarEventDTO {
     private String title;
     private User user;
     private Place place;
-    private List<String> tags;
+    private String tags;
 
     public CreateCalendarEventDTO(){}
 
-    public CreateCalendarEventDTO(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
+    public CreateCalendarEventDTO(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<String> user, Optional<String> place, Optional<String> tags){
         this.title = title;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.place = place.orElse(null);
-        this.user = user.orElse(null);
+        this.place = place.map(Place::new).orElse(null);
+        this.user = user.map(User::new).orElse(null);
         this.tags = tags.orElse(null);
+    }
+
+    private String[] createTagsList(String tags) {
+        System.out.println("Tags: " + tags);
+        String[] tagsArray = tags.split(",");
+        System.out.println("Tag1: " + tagsArray[0] + "\nTag2: " + tagsArray[1]);
+        return tags.split(",");
     }
 
     public String getDescription() {
@@ -77,11 +85,15 @@ public class CreateCalendarEventDTO {
         this.place = place;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public String[] getTags() {
+        String[] tagsArray = new String[1];
+        if (tags == null || tags.trim().equals(""))
+            return null;
+        tagsArray[0] = tags;
+        return tagsArray;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 }

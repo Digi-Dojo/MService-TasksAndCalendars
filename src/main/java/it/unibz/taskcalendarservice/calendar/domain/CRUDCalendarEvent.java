@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +22,12 @@ public class CRUDCalendarEvent {
     }
 
     public CalendarEvent createCalendarEvent(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place,
-                                             Optional<User> user, Optional<List<String>> tags){
+                                             Optional<User> user, Optional<String[]> tags){
         return calendarEventRepository.save(new CalendarEvent(description, startDate, endDate, place, user, tags,title));
     }
 
     public CalendarEvent updateCalendarEvent(Long calendarEventID, String title, Optional<String> description, Optional<LocalDateTime> startDate,
-                                             Optional<LocalDateTime> endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
+                                             Optional<LocalDateTime> endDate, Optional<Place> place, Optional<User> user, Optional<String> tags){
         CalendarEvent toBeModified = searchCalendarEvent.findById(calendarEventID);
         description.ifPresent(toBeModified::setDescription);
         startDate.ifPresent(toBeModified::setStartDate);

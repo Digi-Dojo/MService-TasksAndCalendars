@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,14 +27,15 @@ public class CalendarEvent {
     private User user;
     @Transient
     private Place place;
-    private List<String> tags;// same as on the task (array is better)
+    @Transient
+    private String[] tags;// same as on the task (array is better)
 
     public CalendarEvent() {
     }
 
     //Constructors
     @Autowired
-    public CalendarEvent(Long id , String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags) {
+    public CalendarEvent(Long id , String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<String[]> tags) {
         this.id = id;
         this.description = description;
         this.startDate = startDate;
@@ -46,7 +48,7 @@ public class CalendarEvent {
     }
 
     @Autowired
-    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags, String title) {
+    public CalendarEvent(String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place, Optional<User> user, Optional<String[]> tags, String title) {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -107,20 +109,26 @@ public class CalendarEvent {
         this.place = place;
     }
 
-    public List<String> getTags() {
+    public String[] getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTags(String tags) {
+        this.tags = tags.split(",");
     }
 
     //Methods
     public void addTag(String tag) {
         if (tags == null) {
-            tags = new ArrayList<>();
+            tags = new String[1];
+            tags[0] = tag;
         }
-        tags.add(tag);
+        else{
+            String[] newTags = new String[tags.length + 1];
+            System.arraycopy(tags, 0, newTags, 0, tags.length);
+            newTags[newTags.length - 1] = tag;
+            tags = newTags;
+        }
     }
 
     public Long getId() {

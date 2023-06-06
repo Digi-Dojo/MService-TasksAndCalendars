@@ -18,6 +18,11 @@ public class Place {
     }
 
     @Autowired
+    public Place(String name){
+        this.name = name;
+    }
+
+    @Autowired
     public Place(Long id, String name){
         this.id = id;
         this.name = name;

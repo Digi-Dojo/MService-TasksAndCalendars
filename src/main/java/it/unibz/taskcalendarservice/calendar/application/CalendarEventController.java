@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,6 @@ public class CalendarEventController {
 
     @PostMapping("/create")
     public CalendarEvent createCalendarEvent (@RequestBody CreateCalendarEventDTO calendarEventDTO){
-        System.out.println("CalendarEvent description: " + calendarEventDTO.getDescription());
         return crudCalendarEvent.createCalendarEvent(calendarEventDTO.getTitle(), calendarEventDTO.getDescription(),
                                                     calendarEventDTO.getStartDate(), calendarEventDTO.getEndDate(),
                 Optional.ofNullable(calendarEventDTO.getPlace()), Optional.ofNullable(calendarEventDTO.getUser()), Optional.ofNullable(calendarEventDTO.getTags()));
@@ -41,7 +41,7 @@ public class CalendarEventController {
 
     @PostMapping("/update/{id}")
     public CalendarEvent updateCalendarEvent(Long calendarEventID, String title, Optional<String> description, Optional<LocalDateTime> startDate,
-                                             Optional<LocalDateTime> endDate, Optional<Place> place, Optional<User> user, Optional<List<String>> tags){
+                                             Optional<LocalDateTime> endDate, Optional<Place> place, Optional<User> user, Optional<String> tags){
         return crudCalendarEvent.updateCalendarEvent(calendarEventID, title, description, startDate, endDate, place, user, tags);
     }
 
