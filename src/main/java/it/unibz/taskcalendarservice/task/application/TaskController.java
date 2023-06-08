@@ -44,8 +44,22 @@ public class TaskController {
     }
 
     @PostMapping("/update/{id}")
-    public Task updateTask(Long taskID, Optional<String> description, Optional<Status> status, Optional<User> user, Optional<Place> place, Optional<List<String>> tags){
-        return crudTask.updateTask(taskID, description, status, user, place, tags);
+    public Task updateTask(
+            @PathVariable("id") Long id,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) Status status,
+            @RequestParam(required = false) User user,
+            @RequestParam(required = false) Place place,
+            @RequestParam(required = false) List<String> tags
+    ) {
+        return  crudTask.updateTask(
+                id,
+                Optional.ofNullable(description),
+                Optional.ofNullable(status),
+                Optional.ofNullable(user),
+                Optional.ofNullable(place),
+                Optional.ofNullable(tags)
+        );
     }
 
     @DeleteMapping("/delete/{id}")
