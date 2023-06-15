@@ -1,4 +1,5 @@
 package it.unibz.taskcalendarservice.calendar.application.event;
+import it.unibz.taskcalendarservice.calendar.domain.CalendarEvent;
 import lombok.Getter;
 
 public class CalendarEventCreated extends CalendarEvent {
@@ -9,9 +10,9 @@ public class CalendarEventCreated extends CalendarEvent {
     private String type = EVENT_CREATED ;
 
     @Getter
-    private it.unibz.taskcalendarservice.calendar.domain.CalendarEvent payload;
+    private CalendarEvent payload;
 
-    public CalendarEventCreated(it.unibz.taskcalendarservice.calendar.domain.CalendarEvent payload){this.payload = payload;}
+    public CalendarEventCreated(CalendarEvent payload){this.payload = payload;}
 
     public String toJson(){
         return "{" +
