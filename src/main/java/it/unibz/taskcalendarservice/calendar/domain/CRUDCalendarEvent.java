@@ -1,19 +1,21 @@
 package it.unibz.taskcalendarservice.calendar.domain;
 
+import it.unibz.taskcalendarservice.calendar.application.kafka.CalendarEventProducer;
 import it.unibz.taskcalendarservice.common.domain.Place;
 import it.unibz.taskcalendarservice.common.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CRUDCalendarEvent {
     private final CalendarEventRepository calendarEventRepository;
     private final SearchCalendarEvent searchCalendarEvent;
+
+    @Autowired
+    private CalendarEventProducer broadcaster;
 
     @Autowired
     public CRUDCalendarEvent(CalendarEventRepository calendarEventRepository, SearchCalendarEvent searchCalendarEvent) {
@@ -23,6 +25,7 @@ public class CRUDCalendarEvent {
 
     public CalendarEvent createCalendarEvent(String title, String description, LocalDateTime startDate, LocalDateTime endDate, Optional<Place> place,
                                              Optional<User> user, Optional<String[]> tags){
+        broadcaster.emitCalendarEventCreated(new CalendarEvent(description, startDate, endDate, place, user, tags,title));
         return calendarEventRepository.save(new CalendarEvent(description, startDate, endDate, place, user, tags,title));
     }
 
@@ -35,6 +38,7 @@ public class CRUDCalendarEvent {
         user.ifPresent(toBeModified::setUser);
         place.ifPresent(toBeModified::setPlace);
         tags.ifPresent(toBeModified::setTags);
+        broadcaster.emitCalendarEventUpdated(toBeModified);
         assert user.isEmpty() || place.isEmpty();
         return calendarEventRepository.save(toBeModified);
     }
