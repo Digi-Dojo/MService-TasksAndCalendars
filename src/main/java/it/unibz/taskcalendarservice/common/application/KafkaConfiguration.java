@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.calendar.application.kafka;
+package it.unibz.taskcalendarservice.common.application;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -13,7 +13,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import java.util.Map;
 
 @Configuration
-public class CalendarEventKafkaConfiguration {
+public class KafkaConfiguration {
     @Value("${spring.kafka.properties.bootstrap.servers}")
     private String bootstrapServers;
 
@@ -27,7 +27,7 @@ public class CalendarEventKafkaConfiguration {
     private String securityProtocol;
 
     @Bean
-    public ProducerFactory<String, String> startupProducerFactory() {
+    public ProducerFactory<String, String> producerFactory() {
         return new DefaultKafkaProducerFactory<>(Map.of(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
                 "sasl.mechanism", saslMechanism,
@@ -41,7 +41,7 @@ public class CalendarEventKafkaConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, String> startupKafkaTemplate() {
-        return new KafkaTemplate<>(startupProducerFactory());
+    public KafkaTemplate<String, String> KafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 }
