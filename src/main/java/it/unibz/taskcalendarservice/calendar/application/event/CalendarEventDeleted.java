@@ -18,7 +18,7 @@ public class CalendarEventDeleted extends CalendarEvent {
         return "{" +
                 "\"type\": \"" + type + "\"," +
                 "\"payload\": {" +
-                "\"id\": \"" + payload.getId() + "\"," +
+                "\"id\": \"" + payload.getId() + "\"" +
                 "}" +
                 "}";
     }

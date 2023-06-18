@@ -14,16 +14,17 @@ public class CalendarEventUpdated {
 
     public CalendarEventUpdated(CalendarEvent payload){this.payload = payload;}
 
-    public String toJson(){
+    public String toJson() {
         return "{" +
                 "\"type\": \"" + type + "\"," +
                 "\"payload\": {" +
                 "\"id\": \"" + payload.getId() + "\"," +
                 "\"title\": \"" + payload.getTitle() + "\"," +
                 "\"description\": \"" + payload.getDescription() + "\"," +
-                "\"startTime\": \"" + payload.getStartDate() + "\"" +
-                "\"endTime\": \"" + payload.getEndDate() + "\"" +
-                "\"tags\": \"" + payload.getTags() + "\"" +
+                "\"startTime\": \"" + payload.getStartDate() + "\"," +
+                "\"endTime\": \"" + payload.getEndDate() + "\"," +
+                "\"tags\": \"" + payload.getTags() + "\"," +
+                "\"user\": \"" + payload.getUser() + "\"" +
                 "}" +
                 "}";
     }
