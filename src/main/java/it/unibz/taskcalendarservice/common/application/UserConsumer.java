@@ -20,7 +20,7 @@ public class UserConsumer {
 
             String idAsString = payload.getString("id");
             Long userId = Long.parseLong(idAsString);
-            String userName = payload.getString("name");
+            String userName = payload.getString("name");  // we tested it with event.created as topic and key = title. So it works and should work later on with users!
 
             User user = new User(userId, userName);
             //list of created User
