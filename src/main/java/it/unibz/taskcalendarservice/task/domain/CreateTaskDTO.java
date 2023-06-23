@@ -1,8 +1,7 @@
 package it.unibz.taskcalendarservice.task.domain;
 
-import it.unibz.taskcalendarservice.common.domain.Place;
-import it.unibz.taskcalendarservice.common.domain.User;
-import jakarta.persistence.Transient;
+import it.unibz.taskcalendarservice.common.domain.place.Place;
+import it.unibz.taskcalendarservice.common.domain.user.User;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,11 +1,13 @@
 package it.unibz.taskcalendarservice.common.application;
 
-import it.unibz.taskcalendarservice.common.domain.*;
+import it.unibz.taskcalendarservice.common.domain.user.CRUDUser;
+import it.unibz.taskcalendarservice.common.domain.user.CreateUserDTO;
+import it.unibz.taskcalendarservice.common.domain.user.SearchUser;
+import it.unibz.taskcalendarservice.common.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -16,15 +18,11 @@ public class UserController {
     private final SearchUser searchUser;
 
     @Autowired
-    public UserController(CRUDUser crudTask, SearchUser searchTask) {
-        this.crudUser = crudTask;
-        this.searchUser = searchTask;
+    public UserController(CRUDUser crudUser, SearchUser searchUser) {
+        this.crudUser = crudUser;
+        this.searchUser = searchUser;
     }
 
-    /*
-    Test: curl http://localhost:8080/api/tasks/sayhello
-    run in terminal
-     */
     @PostMapping("/{id}")
     public User findById(@PathVariable("id")Long id){
         return searchUser.findById(id);

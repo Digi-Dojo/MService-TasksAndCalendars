@@ -1,8 +1,8 @@
 package it.unibz.taskcalendarservice.calendar.application;
 
 import it.unibz.taskcalendarservice.calendar.domain.CreateCalendarEventDTO;
-import it.unibz.taskcalendarservice.common.domain.Place;
-import it.unibz.taskcalendarservice.common.domain.User;
+import it.unibz.taskcalendarservice.common.domain.place.Place;
+import it.unibz.taskcalendarservice.common.domain.user.User;
 import it.unibz.taskcalendarservice.calendar.domain.CalendarEvent;
 import it.unibz.taskcalendarservice.calendar.domain.CRUDCalendarEvent;
 import it.unibz.taskcalendarservice.calendar.domain.SearchCalendarEvent;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

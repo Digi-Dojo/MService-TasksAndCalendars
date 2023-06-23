@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.common.domain;
+package it.unibz.taskcalendarservice.common.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

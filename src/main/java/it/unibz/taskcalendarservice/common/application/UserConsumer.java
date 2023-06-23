@@ -1,6 +1,6 @@
 package it.unibz.taskcalendarservice.common.application;
 
-import it.unibz.taskcalendarservice.common.domain.User;
+import it.unibz.taskcalendarservice.common.domain.user.User;
 import org.json.JSONObject;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.common.domain;
+package it.unibz.taskcalendarservice.common.domain.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,15 +28,15 @@ public class CRUDUser {
 
     public boolean deleteUser(Long id){
         Optional<User> toBeRemoved = userRepository.findById(id);
-        if(toBeRemoved.isEmpty()) throw new IllegalArgumentException("Calendar event with id '" + id + "' does not exist");
+        if(toBeRemoved.isEmpty()) throw new IllegalArgumentException("User with id '" + id + "' does not exist");
         userRepository.delete(toBeRemoved.get());
         try{
             userRepository.findById(id);
         }catch (Exception e){
-            System.out.println("Calendar event successfully deleted");
+            System.out.println("User successfully deleted");
             return true;
         }
-        System.out.println("Process unsuccessful, Calendar event has not been deleted");
+        System.out.println("Process unsuccessful, User has not been deleted");
         return false;
     }
 }

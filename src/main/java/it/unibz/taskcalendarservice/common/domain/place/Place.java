@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.common.domain;
+package it.unibz.taskcalendarservice.common.domain.place;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +15,14 @@ public class Place {
     String name;
 
     public Place() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Autowired

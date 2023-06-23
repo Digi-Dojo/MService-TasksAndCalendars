@@ -1,8 +1,9 @@
-package it.unibz.taskcalendarservice.common.domain;
+package it.unibz.taskcalendarservice.common.domain.place;
 
-public class CreateUserDTO {
+public class CreatePlaceDTO {
+
     String name;
-    public CreateUserDTO(){}
+    public CreatePlaceDTO(){}
 
 
     public String getName() {

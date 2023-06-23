@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@EnableJpaRepositories({"it.unibz.taskcalendarservice.calendar.domain", "it.unibz.taskcalendarservice.task.domain", "it.unibz.taskcalendarservice.common.domain"})
+@EnableJpaRepositories({"it.unibz.taskcalendarservice.calendar.domain", "it.unibz.taskcalendarservice.task.domain", "it.unibz.taskcalendarservice.common.domain.user", "it.unibz.taskcalendarservice.common.domain.place"})
 public class TaskAndCalendarServiceApplication {
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication.run(TaskAndCalendarServiceApplication.class, args);
