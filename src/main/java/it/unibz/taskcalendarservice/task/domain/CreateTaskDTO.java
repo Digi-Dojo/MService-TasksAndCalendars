@@ -3,6 +3,7 @@ package it.unibz.taskcalendarservice.task.domain;
 import it.unibz.taskcalendarservice.common.domain.place.Place;
 import it.unibz.taskcalendarservice.common.domain.user.User;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,11 +12,11 @@ public class CreateTaskDTO {
     private Status status;
     private User user;
     private Place place;
-    private List<String> tags; // probabilmente array è meglio per indicizzare
+    private String tags; // probabilmente array è meglio per indicizzare
 
     public CreateTaskDTO(){}
 
-    public CreateTaskDTO(String description, Optional<Place> place, Status status, Optional<List<String>> tags, String title,  Optional<User> user) {
+    public CreateTaskDTO(String title, String description, Optional<User> user, Optional<Place> place, Status status, Optional<String> tags) {
         this.description = description;
         this.title = title;
         this.status = status;
@@ -65,10 +66,11 @@ public class CreateTaskDTO {
     }
 
     public List<String> getTags() {
-        return tags;
+        if(tags.isEmpty()) return null;
+        return Arrays.asList(tags.split(","));
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 }
