@@ -1,14 +1,11 @@
 package it.unibz.taskcalendarservice.calendar.domain;
 
-import it.unibz.taskcalendarservice.common.domain.Place;
-import it.unibz.taskcalendarservice.common.domain.User;
+import it.unibz.taskcalendarservice.common.domain.place.Place;
+import it.unibz.taskcalendarservice.common.domain.user.User;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Entity

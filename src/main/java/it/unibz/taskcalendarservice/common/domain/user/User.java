@@ -1,4 +1,4 @@
-package it.unibz.taskcalendarservice.common.domain;
+package it.unibz.taskcalendarservice.common.domain.user;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     String name;
 
     public User() {
