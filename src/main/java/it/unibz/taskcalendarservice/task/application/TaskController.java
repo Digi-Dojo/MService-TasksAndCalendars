@@ -39,6 +39,7 @@ public class TaskController {
 
     @PostMapping("/create")
     public Task createTask(@RequestBody CreateTaskDTO createTaskDTO){
+        System.out.println("\nCreating task\n");
         return crudTask.createTask( createTaskDTO.getDescription(), Optional.ofNullable(createTaskDTO.getPlace()), createTaskDTO.getStatus(),
                 Optional.ofNullable(createTaskDTO.getTags()), createTaskDTO.getTitle(), Optional.ofNullable(createTaskDTO.getUser()));
     }
@@ -69,6 +70,7 @@ public class TaskController {
 
     @GetMapping("/getAll")
     public List<Task> getAll(){
+        System.out.println("GETTING ALL TASKS");
         return searchTask.getAll();
     }
 }

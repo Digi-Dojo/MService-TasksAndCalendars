@@ -52,6 +52,7 @@ public class CalendarEventController {
 
     @GetMapping("/getAll")
     public List<CalendarEvent> getAll(){
+        System.out.println("GETTING ALL CALENDAR EVENTS");
         return searchCalendarEvent.getAll();
     }
 }
